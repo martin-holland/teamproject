@@ -4,13 +4,13 @@ Virtual bookshelf for those who wish to trade books between each other with some
 
 ## Technologies used
 
-Built with: 
+Built with:
 
 - HTML
 - JS
 - CSS
 - JSON
-- Reactjs 
+- Reactjs
 - Node
 - Data Structures
 
@@ -22,27 +22,31 @@ Live Page not ready yet.
 
 ## Dependancies
 
-## Sources 
+## Sources
+
+### JSON Server For Local Testing
+
+Used JSON Server and guide from: https://medium.com/@royanimesh2211/create-a-free-fake-rest-api-with-json-server-running-on-the-internet-30a627c7c20d
 
 ### Childres books common age ranges for categorisation
+
 - https://www.dummies.com/education/language-arts/getting-published/age-levels-for-childrens-books/
-- 
+-
 
 ## Authors and acknowledgment
 
 Margit Tennosaar - Tutor and Teacher
+
 - GitHub @margittennosaar
 - [LinkedIn](https://www.linkedin.com/in/margittennosaar/)
 - Author of Languages JSON:
 - Languages JSON source: https://stackoverflow.com/questions/3217492/list-of-language-codes-in-yaml-or-json
 
-
-
 ## Requirements
 
-* Node
-* Express
-* Javascript
-* Data Structures
-* HTML
-* CSS
+- Node
+- Express
+- Javascript
+- Data Structures
+- HTML
+- CSS

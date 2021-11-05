@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getLangs } from "./functionsLibrary";
+import { getLangs, postData } from "./functionsLibrary";
 
 const languages = getLangs();
 const ageRanges = [
@@ -86,6 +86,7 @@ class BookForm extends Component {
     console.log(data);
     let { languages, ageRanges, availability, ...inputJSON } = data;
     console.log(inputJSON);
+    postData(inputJSON);
   }
 
   render() {
