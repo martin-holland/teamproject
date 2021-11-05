@@ -28,7 +28,7 @@ Live Page not ready yet.
 
 Used JSON Server and guide from: https://medium.com/@royanimesh2211/create-a-free-fake-rest-api-with-json-server-running-on-the-internet-30a627c7c20d
 
-### Childres books common age ranges for categorisation
+### Childrens books common age ranges for categorisation
 
 - https://www.dummies.com/education/language-arts/getting-published/age-levels-for-childrens-books/
 -
