@@ -19,7 +19,7 @@ const ageRanges = [
     name: "Early Readers - Ages 5-9",
   },
   {
-    name: "First Chaper Books - Ages 7-10",
+    name: "First Chapter Books - Ages 7-10",
   },
   {
     name: "Middle Grade Books - Ages 8-12",
@@ -58,7 +58,7 @@ class BookForm extends Component {
       bookLanguage: "",
       ISBN: "",
       location: "",
-      adultOrChild: "Adult",
+      adultOrChild: "",
       ageRange: "",
       comments: "",
     };
