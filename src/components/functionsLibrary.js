@@ -1,3 +1,4 @@
+// we use a function instead of import to add a layer and hide the source
 function getLangs() {
   const languages = require("./languages.json");
   return languages;
