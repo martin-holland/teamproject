@@ -88,7 +88,9 @@ class BookForm extends Component {
     // console.log(this.state);
     let { languages, ageRanges, availability, ...inputJSON } = data; // deconstructing, after this data and state are not the same anymore,
     console.log(inputJSON);
-    postData(inputJSON);
+    let bookLang = inputJSON.bookLanguage;
+    let toExport = { bookLang, books: [inputJSON] };
+    postData(toExport);
   }
 
   render() {

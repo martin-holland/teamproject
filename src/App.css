@@ -17,3 +17,9 @@
   width: 100%;
   align-content: center;
 }
+
+footer {
+  background-color: #e6c1ae;
+  font-family: "Libre Baskerville", serif;
+  color: #4d2c06;
+}
