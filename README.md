@@ -31,7 +31,10 @@ Used JSON Server and guide from: https://medium.com/@royanimesh2211/create-a-fre
 ### Childrens books common age ranges for categorisation
 
 - https://www.dummies.com/education/language-arts/getting-published/age-levels-for-childrens-books/
--
+
+### Fetchwrapper explanation and using:
+
+- https://jasonwatmore.com/post/2020/04/18/fetch-a-lightweight-fetch-wrapper-to-simplify-http-requests
 
 ## Authors and acknowledgment
 
