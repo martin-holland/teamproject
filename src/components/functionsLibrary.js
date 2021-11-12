@@ -1,3 +1,4 @@
+// we use a function instead of import to add a layer and hide the source
 function getLangs() {
   const languages = require("./languages.json");
   return languages;
@@ -6,7 +7,7 @@ function getLangs() {
 function postData(inputObject) {
   let JSONData = JSON.stringify(inputObject);
   try {
-    fetch("http://localhost:3000/library", {
+    fetch("http://localhost:3000/library", { 
       method: "POST",
       mode: "cors",
       body: JSONData,

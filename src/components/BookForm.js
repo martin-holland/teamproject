@@ -19,7 +19,7 @@ const ageRanges = [
     name: "Early Readers - Ages 5-9",
   },
   {
-    name: "First Chaper Books - Ages 7-10",
+    name: "First Chapter Books - Ages 7-10",
   },
   {
     name: "Middle Grade Books - Ages 8-12",
@@ -45,7 +45,7 @@ let data;
 
 class BookForm extends Component {
   constructor(props) {
-    super(props);
+    super(props); // you can’t use this in a constructor until after you’ve called the parent constructor (super)
     this.state = {
       languages,
       ageRanges,
@@ -63,7 +63,7 @@ class BookForm extends Component {
       comments: "",
     };
 
-    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this); // binding the function inside this class
   }
 
   handleInputChange(event) {
@@ -73,9 +73,10 @@ class BookForm extends Component {
 
     this.setState(
       {
-        [name]: value,
+        [name]: value, //
       },
       () => {
+        // see how to use the state, now we are storing state into a separate varibale, to be use later, to POST, but could we use the STATE?
         data = this.state;
       }
     );
@@ -84,7 +85,8 @@ class BookForm extends Component {
   submitForm(event) {
     event.preventDefault();
     console.log(data);
-    let { languages, ageRanges, availability, ...inputJSON } = data;
+    // console.log(this.state);
+    let { languages, ageRanges, availability, ...inputJSON } = data; // deconstructing, after this data and state are not the same anymore,
     console.log(inputJSON);
     postData(inputJSON);
   }
