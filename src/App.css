@@ -1,7 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Libre+Franklin&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-shadow: none;
+  background-color: #f0e0d2;
 }
 
 .bookform {
@@ -22,4 +25,8 @@ footer {
   background-color: #e6c1ae;
   font-family: "Libre Baskerville", serif;
   color: #4d2c06;
+  height: 100px;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
 }
