@@ -45,8 +45,8 @@ let data;
 
 class BookForm extends Component {
   constructor(props) {
-    super(props); // you can’t use this in a constructor until after you’ve called the parent constructor (super)
-    this.state = {
+    super(props); // to use in a constructor you have to call the parent constructor (super). Legacy code, not needed anymore.
+    this.state = {  // legacy code>>> can use only state = {}
       languages,
       ageRanges,
       availability,
