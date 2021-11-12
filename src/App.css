@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Libre+Franklin&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
 * {
   margin: 0;
@@ -7,10 +7,46 @@
   background-color: #f0e0d2;
 }
 
-.bookform {
+header {
+  width: 100%;
+  background-color: #e6c1ae;
+  color: #4d2c06;
+  padding: 2rem;
+  /* display: flex; */
+  /* flex-direction: column;
+  justify-content: center; */
+  /* text-align: center; */
+}
+
+header h1,
+header p {
+  font-family: "Open Sans", sans-serif;
+  background-color: #e6c1ae;
+  padding: 1rem;
+}
+
+header img {
+  height: 75px;
+  width: auto;
+  float: left;
+  padding: 20px;
+  margin-right: 10%;
+  background: no-repeat fixed center center/cover;
+}
+
+div .bookform {
   display: flex;
-  align-content: center;
+  justify-content: center;
+}
+
+.bookform {
+  padding: 1rem;
+  margin: 10px;
+  display: flex;
+  /* justify-content: end;
+  align-content: center; */
   width: 80%;
+  font-family: "Open Sans", sans-serif;
 }
 
 .bookInputForm {
@@ -18,15 +54,55 @@
   flex-direction: column;
   flex-wrap: wrap;
   width: 100%;
+  margin: 10px;
   align-content: center;
+  font-family: "Open Sans", sans-serif;
+}
+
+form label,
+input,
+select,
+option {
+  font-family: "Open Sans", sans-serif;
+  border-radius: 5px;
+  border-style: 1px solid;
+  margin: 0;
+  padding: 3px;
+}
+
+button {
+  width: 200px;
+  height: 40px;
+  border-radius: 5%;
+  background-color: #e6c1ae;
+  color: #4d2c06;
+  padding: 10px;
+  margin: 20px;
+  align-self: center;
+}
+
+button:hover {
+  background-color: #c7916e;
+  box-shadow: 0 0 5px gray;
+  border-radius: 7%;
+  display: inline-block;
+  margin: 1rem;
+  text-transform: capitalize;
+  cursor: pointer;
 }
 
 footer {
   background-color: #e6c1ae;
-  font-family: "Libre Baskerville", serif;
   color: #4d2c06;
-  height: 100px;
+  height: 10rem;
   width: 100%;
   padding: 20px;
-  text-align: center end;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+footer p {
+  font-family: "Open Sans", sans-serif;
+  background-color: #e6c1ae;
 }
