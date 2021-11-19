@@ -6,8 +6,9 @@ function getLangs() {
 
 function postData(inputObject) {
   let JSONData = JSON.stringify(inputObject);
+
   try {
-    fetch("http://localhost:3000/languages", {
+    fetch(`http://localhost:3000/languages`, {
       method: "POST",
       mode: "cors",
       body: JSONData,
