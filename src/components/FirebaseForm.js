@@ -1,63 +1,159 @@
-// Need to set values up in the database
-// Need to match the values in this function and render them
-// Need to check that the data comes back from the database
-// Test form to see how firebase works
-
-import React from "react";
-
 import { useState, useEffect } from "react";
-
 import { db } from "./firebase-config";
-
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 
 function FirebaseForm(props) {
-  const [language, setLanguage] = useState([]);
+  const [users, setUsers] = useState([]);
   const [newOwner, setNewOwner] = useState("");
   const [newBookTitle, setNewBookTitle] = useState("");
+  const [newBookLanguage, setNewBookLanguage] = useState("");
+  const [newISBN, setnewISBN] = useState(0);
+  const [newAgeRange, setNewAgeRange] = useState("");
+  const [newAvailable, setNewAvailable] = useState(false);
+  const [newPubYear, setNewPubYear] = useState("");
+  const [newLocation, setNewLocation] = useState("");
+  const [newAdultOrChild, setNewAdultOrChild] = useState("");
+  const [newComment, setNewComment] = useState("");
 
-  const languageCollectionRef = collection(db, "languages");
+  const languagesCollectionRef = collection(db, props.language);
 
-  useEffect(() => {
-    const getLanguage = async () => {
-      const data = await getDocs(languageCollectionRef);
-
-      setLanguage(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
-
-    getLanguage();
-  }, []);
-
-  const createUser = async () => {
-    await addDoc(languageCollectionRef, {
-      owner: newOwner,
-      age: newBookTitle,
-    });
+  const getUsers = async () => {
+    const data = await getDocs(languagesCollectionRef);
+    console.log(data);
+    setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))); //use spread operator to return all fields from data
   };
 
+  const createUser = async () => {
+    await addDoc(languagesCollectionRef, {
+      owner: newOwner,
+      bookTitle: newBookTitle,
+      bookLanguage: newBookLanguage,
+      isbn: newISBN,
+      ageRange: newAgeRange,
+      available: newAvailable,
+      pubYear: newPubYear,
+      location: newLocation,
+      adultOrChild: newAdultOrChild,
+      comment: newComment,
+    });
+    getUsers();
+  };
+
+  const deleteUser = async (id) => {
+    const userDoc = doc(db, "languages", id);
+    await deleteDoc(userDoc);
+    getUsers();
+  };
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
   return (
-    <div className="FirebaseForm">
+    <div className="App">
       <input
-        placeholder="Name..."
+        type="text"
+        placeholder="Owner"
         onChange={(event) => {
           setNewOwner(event.target.value);
         }}
-      ></input>
+      />
       <input
-        placeholder="Age..."
-        type="number"
+        type="text"
+        placeholder="book title"
         onChange={(event) => {
           setNewBookTitle(event.target.value);
         }}
-      ></input>
-      <button onClick={createUser}>Create Language</button>
+      />
+      <input
+        type="text"
+        placeholder="book language"
+        onChange={(event) => {
+          setNewBookLanguage(event.target.value);
+        }}
+      />
+      <input
+        type="text"
+        placeholder="isbn"
+        onChange={(event) => {
+          setnewISBN(event.target.value);
+        }}
+      />
+      <input
+        type="text"
+        placeholder="age range"
+        onChange={(event) => {
+          setNewAgeRange(event.target.value);
+        }}
+      />
+      <input
+        type="text"
+        placeholder="available"
+        onChange={(event) => {
+          setNewAvailable(event.target.value);
+        }}
+      />
+      <input
+        type="text"
+        placeholder="pub year"
+        onChange={(event) => {
+          setNewPubYear(event.target.value);
+        }}
+      />
+      <input
+        type="text"
+        placeholder="location"
+        onChange={(event) => {
+          setNewLocation(event.target.value);
+        }}
+      />
+      <input
+        type="text"
+        placeholder="adult or child"
+        onChange={(event) => {
+          setNewAdultOrChild(event.target.value);
+        }}
+      />
+      <input
+        type="text"
+        placeholder="comment"
+        onChange={(event) => {
+          setNewComment(event.target.value);
+        }}
+      />
+      <button onClick={createUser}> Create User</button>
 
-      {language.map((language) => {
+      {users.map((user) => {
         return (
           <div>
             {" "}
-            <h1> Name : {language.name} </h1>
-            <h1> Age : {language.age} </h1>
+            <h1> Name: {user.name} </h1>
+            <h1> Age: {user.age} </h1>
+            <h1> Owner: {user.owner} </h1>
+            <h1> Book Title: {user.bookTitle} </h1>
+            <h1> Book Language: {user.bookLanguage} </h1>
+            <h1> ISBN: {user.isbn} </h1>
+            <h1> Age Range: {user.ageRange} </h1>
+            <h1> Available: {user.available} </h1>
+            <h1> Publication Year: {user.pubYear} </h1>
+            <h1> Location: {user.location} </h1>
+            <h1> Adult or Child: {user.adultOrChild} </h1>
+            <h1> Comments: {user.comment} </h1>
+            <button
+              onClick={() => {
+                deleteUser(user.id);
+              }}
+            >
+              {" "}
+              Delete User
+            </button>
           </div>
         );
       })}
