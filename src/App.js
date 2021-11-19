@@ -10,9 +10,9 @@ function App() {
     
     <div>
       <Header />
-      {/* <BookForm /> */}
+      <BookForm />
       {/* <FirebaseForm /> */}
-      <About />
+      {/* <About /> */}
       <Footer />
     </div>
   );
