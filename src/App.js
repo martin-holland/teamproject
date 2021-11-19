@@ -7,12 +7,9 @@ import About from './components/About';
 
 function App() {
   return (
-    
     <div>
       <Header />
-      <BookForm />
-      {/* <FirebaseForm /> */}
-      {/* <About /> */}
+      <FirebaseForm />
       <Footer />
     </div>
   );
