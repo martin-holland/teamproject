@@ -1,6 +1,7 @@
 // Need to set values up in the database
 // Need to match the values in this function and render them
 // Need to check that the data comes back from the database
+// Test form to see how firebase works
 
 import React from "react";
 
@@ -13,7 +14,7 @@ import { collection, getDocs, addDoc } from "firebase/firestore";
 function FirebaseForm(props) {
   const [language, setLanguage] = useState([]);
   const [newOwner, setNewOwner] = useState("");
-  const [newBookTitle, setNewBookTitle] = useState();
+  const [newBookTitle, setNewBookTitle] = useState("");
 
   const languageCollectionRef = collection(db, "languages");
 
