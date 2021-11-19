@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Poiret+One&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-shadow: none;
-  background-color: #f0e0d2;
 }
 
 header {
@@ -12,17 +12,23 @@ header {
   background-color: #e6c1ae;
   color: #4d2c06;
   padding: 2rem;
-  /* display: flex; */
-  /* flex-direction: column;
-  justify-content: center; */
-  /* text-align: center; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
 
-header h1,
+header h1 {
+  font-family: "Poiret One", cursive;
+  background-color: #e6c1ae;
+  font-size: 3rem;
+}
+
 header p {
   font-family: "Open Sans", sans-serif;
   background-color: #e6c1ae;
-  padding: 1rem;
+  padding: 0.5rem;
+  font-size: 1.2rem;
 }
 
 header img {
@@ -32,20 +38,22 @@ header img {
   padding: 20px;
   margin-right: 10%;
   background: no-repeat fixed center center/cover;
+  background-color: #e6c1ae;
 }
 
 div .bookform {
   display: flex;
   justify-content: center;
+  background-color: #f0e0d2;
 }
 
 .bookform {
   padding: 1rem;
-  margin: 10px;
+  margin: 0;
   display: flex;
   /* justify-content: end;
   align-content: center; */
-  width: 80%;
+  width: 100%;
   font-family: "Open Sans", sans-serif;
 }
 
@@ -54,9 +62,10 @@ div .bookform {
   flex-direction: column;
   flex-wrap: wrap;
   width: 100%;
-  margin: 10px;
+  margin: 0;
   align-content: center;
   font-family: "Open Sans", sans-serif;
+  background-color: #f0e0d2;
 }
 
 form label,
@@ -68,6 +77,7 @@ option {
   border-style: 1px solid;
   margin: 0;
   padding: 3px;
+  background-color: #f0e0d2;
 }
 
 button {
@@ -84,7 +94,7 @@ button {
 button:hover {
   background-color: #c7916e;
   box-shadow: 0 0 5px gray;
-  border-radius: 7%;
+  border-radius: 5%;
   display: inline-block;
   margin: 1rem;
   text-transform: capitalize;
@@ -96,7 +106,7 @@ footer {
   color: #4d2c06;
   height: 10rem;
   width: 100%;
-  padding: 20px;
+  padding: 2rem;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -105,4 +115,45 @@ footer {
 footer p {
   font-family: "Open Sans", sans-serif;
   background-color: #e6c1ae;
+}
+
+.FirebaseForm {
+  background-color: #f0e0d2;
+  color: #4d2c06;
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.5rem;
+  padding: 20px;
+}
+
+.container {
+  background-color: #f0e0d2;
+  width: 100%;
+  padding: 2rem;
+  font-family: "Open Sans", sans-serif;
+  color: #4d2c06;
+}
+
+.container h2 {
+  font-size: 1.2rem;
+  padding: 20px;
+  margin-left: 20px;
+}
+
+.container p {
+  font-size: 1rem;
+  padding: 20px;
+  margin-left: 20px;
+}
+
+.herobanner {
+  background-color: #f0e0d2;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.herobanner img {
+  width: 60%;
+  height: auto;
+  object-fit: cover;
 }
