@@ -4,7 +4,6 @@
   margin: 0;
   padding: 0;
   box-shadow: none;
-  background-color: #f0e0d2;
 }
 
 header {
@@ -12,10 +11,10 @@ header {
   background-color: #e6c1ae;
   color: #4d2c06;
   padding: 2rem;
-  /* display: flex; */
-  /* flex-direction: column;
-  justify-content: center; */
-  /* text-align: center; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
 
 header h1,
@@ -32,20 +31,22 @@ header img {
   padding: 20px;
   margin-right: 10%;
   background: no-repeat fixed center center/cover;
+  background-color: #e6c1ae;
 }
 
 div .bookform {
   display: flex;
   justify-content: center;
+  background-color: #f0e0d2;
 }
 
 .bookform {
   padding: 1rem;
-  margin: 10px;
+  margin: 0;
   display: flex;
   /* justify-content: end;
   align-content: center; */
-  width: 80%;
+  width: 100%;
   font-family: "Open Sans", sans-serif;
 }
 
@@ -54,9 +55,10 @@ div .bookform {
   flex-direction: column;
   flex-wrap: wrap;
   width: 100%;
-  margin: 10px;
+  margin: 0;
   align-content: center;
   font-family: "Open Sans", sans-serif;
+  background-color: #f0e0d2;
 }
 
 form label,
@@ -68,6 +70,7 @@ option {
   border-style: 1px solid;
   margin: 0;
   padding: 3px;
+  background-color: #f0e0d2;
 }
 
 button {
