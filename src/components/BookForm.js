@@ -46,7 +46,8 @@ let data;
 class BookForm extends Component {
   constructor(props) {
     super(props); // to use in a constructor you have to call the parent constructor (super). Legacy code, not needed anymore.
-    this.state = {  // legacy code>>> can use only state = {}
+    this.state = {
+      // legacy code>>> can use only state = {}
       languages,
       ageRanges,
       availability,
@@ -88,8 +89,9 @@ class BookForm extends Component {
     // console.log(this.state);
     let { languages, ageRanges, availability, ...inputJSON } = data; // deconstructing, after this data and state are not the same anymore,
     console.log(inputJSON);
-    let bookLang = inputJSON.bookLanguage;
-    let toExport = { bookLang, books: [inputJSON] };
+    // let toExport = { bookLang: inputJSON.bookLanguage, books: [inputJSON] };
+    let bookLang = inputJSON.booklanguage;
+    let toExport = { bookLang: bookLang, books: [inputJSON] };
     postData(toExport);
   }
 
