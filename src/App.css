@@ -157,3 +157,22 @@ footer p {
   height: auto;
   object-fit: cover;
 }
+
+.firebaseform {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  align-items: stretch;
+  font-family: "Open Sans", sans-serif;
+}
+
+.firebaseform label,
+input {
+  font-family: "Open Sans", sans-serif;
+}
+
+.firebaseform input {
+  padding: 0.5rem;
+}

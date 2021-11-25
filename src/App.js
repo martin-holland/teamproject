@@ -1,10 +1,8 @@
 import "./App.css";
-// import BookForm from "./components/BookForm";
+import Library from "./components/Library";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import FirebaseForm from "./components/FirebaseForm";
-import newForm from "./components/newForm";
-import BookForm from "./components/BookForm";
 
 function App() {
   return (
@@ -12,6 +10,7 @@ function App() {
       <Header />
       <FirebaseForm language="italian" />
       <Footer />
+      <Library language="italian" />
     </div>
   );
 }

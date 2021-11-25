@@ -1,3 +1,4 @@
+import "firebaseform.css";
 import { useState, useEffect } from "react";
 import { db } from "./firebase-config";
 import {
@@ -49,15 +50,6 @@ function FirebaseForm(props) {
     },
   ];
 
-  const adult_child = [
-    {
-      name: "Adult",
-    },
-    {
-      name: "Child",
-    },
-  ];
-
   const [users, setUsers] = useState([]);
   const [newOwner, setNewOwner] = useState("");
   const [newBookTitle, setNewBookTitle] = useState("");
@@ -106,8 +98,6 @@ function FirebaseForm(props) {
 
   return (
     <div className="firebaseform">
-      <h2>Add your book to our library!</h2>
-      <label htmlFor="owner">Owner</label>
       <input
         type="text"
         placeholder="Owner"
@@ -115,7 +105,6 @@ function FirebaseForm(props) {
           setNewOwner(event.target.value);
         }}
       />
-      <label htmlFor="booktitle">Book Title</label>
       <input
         type="text"
         placeholder="book title"
@@ -123,7 +112,6 @@ function FirebaseForm(props) {
           setNewBookTitle(event.target.value);
         }}
       />
-      <label htmlFor="booklang">Book Language</label>
       <input
         type="text"
         placeholder="book language"
@@ -131,7 +119,6 @@ function FirebaseForm(props) {
           setNewBookLanguage(event.target.value);
         }}
       />
-      <label htmlFor="isbn">ISBN</label>
       <input
         type="text"
         placeholder="isbn"
@@ -139,9 +126,8 @@ function FirebaseForm(props) {
           setnewISBN(event.target.value);
         }}
       />
-      <label htmlFor="ageRange">Age Range</label>
       <select
-        placeholder="Age Range"
+        placeholder="Age Ranges"
         onChange={(event) => {
           setNewAgeRange(event.target.value);
         }}
@@ -154,7 +140,6 @@ function FirebaseForm(props) {
           );
         })}
       </select>
-      <label htmlFor="available">Availability</label>
       <select
         onChange={(event) => {
           setNewAvailable(event.target.value);
@@ -168,7 +153,6 @@ function FirebaseForm(props) {
           );
         })}
       </select>
-      <label htmlFor="pubYear">Publication Year</label>
       <input
         type="text"
         placeholder="pub year"
@@ -176,7 +160,6 @@ function FirebaseForm(props) {
           setNewPubYear(event.target.value);
         }}
       />
-      <label htmlFor="location">Location</label>
       <input
         type="text"
         placeholder="location"
@@ -184,21 +167,13 @@ function FirebaseForm(props) {
           setNewLocation(event.target.value);
         }}
       />
-      <label htmlFor="adultOrChild">Adult or Child</label>
-      <select
+      <input
+        type="text"
+        placeholder="adult or child"
         onChange={(event) => {
           setNewAdultOrChild(event.target.value);
         }}
-      >
-        {adult_child.map((obj) => {
-          return (
-            <option key={obj.name} value={obj.name}>
-              {obj.name}
-            </option>
-          );
-        })}
-      </select>
-      <label htmlFor="comment">Comment/Condition</label>
+      />
       <input
         type="text"
         placeholder="comment"
@@ -207,6 +182,34 @@ function FirebaseForm(props) {
         }}
       />
       <button onClick={createUser}> Create User</button>
+
+      {users.map((user) => {
+        return (
+          <div>
+            {" "}
+            <h1> Name: {user.name} </h1>
+            <h1> Age: {user.age} </h1>
+            <h1> Owner: {user.owner} </h1>
+            <h1> Book Title: {user.bookTitle} </h1>
+            <h1> Book Language: {user.bookLanguage} </h1>
+            <h1> ISBN: {user.isbn} </h1>
+            <h1> Age Range: {user.ageRange} </h1>
+            <h1> Available: {user.available} </h1>
+            <h1> Publication Year: {user.pubYear} </h1>
+            <h1> Location: {user.location} </h1>
+            <h1> Adult or Child: {user.adultOrChild} </h1>
+            <h1> Comments: {user.comment} </h1>
+            <button
+              onClick={() => {
+                deleteUser(user.id);
+              }}
+            >
+              {" "}
+              Delete User
+            </button>
+          </div>
+        );
+      })}
     </div>
   );
 }
