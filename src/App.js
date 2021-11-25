@@ -3,7 +3,7 @@ import Library from "./components/Library";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import FirebaseForm from "./components/FirebaseForm";
-import testAxios from "./components/testAxios";
+import TestAxios from "./components/TestAxios";
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
       <FirebaseForm language="italian" />
       <Footer />
       <Library language="italian" />
-      <testAxios />
+      <TestAxios />
     </div>
   );
 }

@@ -38,6 +38,10 @@ function Library(props) {
         return (
           <div className="individualbook">
             {" "}
+            <img
+              alt="book"
+              src={`https://covers.openlibrary.org/b/isbn/${user.isbn}-S.jpg`}
+            ></img>
             <p> Owner: {user.owner} </p>
             <p> Book Title: {user.bookTitle} </p>
             <p> Book Language: {user.bookLanguage} </p>
