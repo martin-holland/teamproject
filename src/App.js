@@ -13,6 +13,7 @@ function App() {
       {/* <FirebaseForm /> */}
       <Main />
       <Footer />
+      <Library language="italian" />
     </div>
   );
 }
