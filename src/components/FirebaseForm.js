@@ -97,7 +97,7 @@ function FirebaseForm(props) {
 
   useEffect(() => {
     getUsers();
-  });
+  }, []);
 
   return (
     <div className="firebaseform">

@@ -23,7 +23,7 @@ function Library(props) {
 
   useEffect(() => {
     getUsers();
-  });
+  }, []);
 
   return (
     <div className="library">
