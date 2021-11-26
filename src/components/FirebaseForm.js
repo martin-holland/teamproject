@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { db } from "./firebase-config";
-import {
-  collection,
-  getDocs,
-  addDoc,
-  updateDoc,
-  doc,
-  deleteDoc,
-} from "firebase/firestore";
+import { collection, getDocs, addDoc } from "firebase/firestore";
+// import {
+//   collection,
+//   getDocs,
+//   addDoc,
+//   updateDoc,
+//   doc,
+//   deleteDoc,
+// } from "firebase/firestore"; // Full list of firebase library if required
 
 function FirebaseForm(props) {
   const ageRanges = [
@@ -74,7 +75,7 @@ function FirebaseForm(props) {
 
   const getUsers = async () => {
     const data = await getDocs(languagesCollectionRef);
-    console.log(data);
+    console.log(data, users);
     setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))); //use spread operator to return all fields from data
   };
 
@@ -94,15 +95,9 @@ function FirebaseForm(props) {
     getUsers();
   };
 
-  const deleteUser = async (id) => {
-    const userDoc = doc(db, "languages", id);
-    await deleteDoc(userDoc);
-    getUsers();
-  };
-
   useEffect(() => {
     getUsers();
-  }, []);
+  });
 
   return (
     <div className="firebaseform">
@@ -206,7 +201,7 @@ function FirebaseForm(props) {
           setNewComment(event.target.value);
         }}
       />
-      <button onClick={createUser}> Create User</button>
+      <button onClick={createUser}>Add Book</button>
     </div>
   );
 }

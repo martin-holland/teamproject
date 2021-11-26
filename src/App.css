@@ -176,3 +176,7 @@ input {
 .firebaseform input {
   padding: 0.5rem;
 }
+
+.individualbook img {
+  float: right;
+}

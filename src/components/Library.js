@@ -2,14 +2,7 @@ import React from "react";
 import "./library.css";
 import { useState, useEffect } from "react";
 import { db } from "./firebase-config";
-import {
-  collection,
-  getDocs,
-  addDoc,
-  updateDoc,
-  doc,
-  deleteDoc,
-} from "firebase/firestore";
+import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
 
 function Library(props) {
   const [users, setUsers] = useState([]);
@@ -23,14 +16,14 @@ function Library(props) {
   };
 
   const deleteUser = async (id) => {
-    const userDoc = doc(db, "languages", id);
+    const userDoc = doc(db, props.language, id);
     await deleteDoc(userDoc);
     getUsers();
   };
 
   useEffect(() => {
     getUsers();
-  }, []);
+  });
 
   return (
     <div className="library">
@@ -58,7 +51,7 @@ function Library(props) {
               }}
             >
               {" "}
-              Delete User
+              Delete Book
             </button>
           </div>
         );
