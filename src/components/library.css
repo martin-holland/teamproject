@@ -1,0 +1,12 @@
+.library {
+  margin: 10px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-gap: 0.5rem;
+}
+
+.individualbook {
+  border: solid black 1px;
+  padding: 20px;
+}
