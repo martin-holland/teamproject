@@ -4,12 +4,14 @@ import FirebaseForm from './components/FirebaseForm'
 import Footer from './components/Footer';
 import Header from './components/Header';
 import About from './components/About';
+import Main from './components/Main';
 
 function App() {
   return (
     <div>
       <Header />
-      <FirebaseForm />
+      {/* <FirebaseForm /> */}
+      <Main />
       <Footer />
     </div>
   );
