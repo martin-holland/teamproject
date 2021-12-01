@@ -10,7 +10,6 @@ import BookCard from "./BookCard";
 const languages = getLangs();
 
 function ClasslessSearch(props) {
-    // updateFoundBooks not working
     const [foundBooks, updateFoundBooks] = useState([]);
     const [bookName, setBookName] = useState("");
     const [language, updateLanguage] = useState(languages.map((obj) => obj.name));
@@ -50,8 +49,10 @@ function ClasslessSearch(props) {
         </form>
 
         <div className="search_results">
-            {foundBooks.map((book) => (
-                <BookCard
+            {foundBooks.filter((book) => {
+                return book.bookTitle.toLowerCase().includes(bookName.toLowerCase())})
+                .map((book) => (
+                    <BookCard
                     id={book.id}
                     key={book.id}
                     title={book.bookTitle}
