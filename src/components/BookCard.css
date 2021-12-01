@@ -1,0 +1,37 @@
+.card {
+    position: relative;
+    margin: 0.5rem 0.6rem;
+    padding: 0.3rem;
+    width: 10vw;
+    min-width: 12rem;
+    border: 1px solid black;
+    border-radius: 2px;
+    box-shadow: 2px 2px 2px #285667;
+    background-color: whitesmoke;
+}
+  
+.card:hover {
+    box-shadow: 5px 5px 5px #18323c;
+}
+  
+  /* img {
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+    width: 5vw;
+    border-radius: 2px;
+    border: 1px solid black;
+    background-size: cover;
+    box-shadow: 1px 2px 1px grey;
+  } */
+  
+  
+h1 {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+}
+  
+p {
+    font-size: 1rem;
+    margin: 0.1rem;
+} 
