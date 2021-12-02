@@ -27,9 +27,9 @@ function Library(props) {
 
   return (
     <div className="library">
-      {users.map((user) => {
+      {users.map((user, key) => {
         return (
-          <div className="individualbook">
+          <div className="individualbook" key={key}>
             {" "}
             <img
               alt="book"
