@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import About from './components/About';
 import Main from './components/Main';
+import Library from './components/Library';
 
 function App() {
   return (
