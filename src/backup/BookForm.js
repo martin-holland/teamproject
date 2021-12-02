@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getLangs, postData } from "./functionsLibrary";
+import { getLangs, postData } from "../components/functionsLibrary";
 
 const languages = getLangs();
 const ageRanges = [
