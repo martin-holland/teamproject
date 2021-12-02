@@ -1,18 +1,21 @@
 import React from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import "./BookCard.css";
 
-const BookCard = (props) => {
-    // const match = useRouteMatch();
-
+// deconstruct props, pass objects directly
+const BookCard = ({
+    id,
+    title,
+    author,
+    available,
+    location,
+}) => {
     return (
-        <div className="card">
-            <h2>{props.title}</h2>
-            <p>Author: {props.author}</p>
-            <p>Publication year: {props.pubYear}</p>
-            {/* <Link to={`${match.url}/${props.title}`}>Read more</Link> */}
+        <div className="card" key={id} id={`${available}`}>
+            <h1>{title}</h1>
+            <p>Author: {author}</p>
+            <p>Location: {location}</p>
         </div>
     )
-
 }
 
 export default BookCard;
