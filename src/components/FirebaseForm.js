@@ -62,6 +62,7 @@ function FirebaseForm(props) {
   const [users, setUsers] = useState([]);
   const [newOwner, setNewOwner] = useState("");
   const [newBookTitle, setNewBookTitle] = useState("");
+  const [newAuthor, setNewAuthor] = useState("");
   const [newBookLanguage, setNewBookLanguage] = useState("");
   const [newISBN, setnewISBN] = useState(0);
   const [newAgeRange, setNewAgeRange] = useState("");
@@ -83,6 +84,7 @@ function FirebaseForm(props) {
     await addDoc(languagesCollectionRef, {
       owner: newOwner,
       bookTitle: newBookTitle,
+      author: newAuthor,
       bookLanguage: newBookLanguage,
       isbn: newISBN,
       ageRange: newAgeRange,
@@ -116,6 +118,14 @@ function FirebaseForm(props) {
         placeholder="book title"
         onChange={(event) => {
           setNewBookTitle(event.target.value);
+        }}
+      />
+      <label htmlFor="booktitle">Author</label>
+      <input
+        type="text"
+        placeholder="book title"
+        onChange={(event) => {
+          setNewAuthor(event.target.value);
         }}
       />
       <label htmlFor="booklang">Book Language</label>

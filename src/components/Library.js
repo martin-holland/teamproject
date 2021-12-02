@@ -37,6 +37,7 @@ function Library(props) {
             ></img>
             <p> Owner: {user.owner} </p>
             <p> Book Title: {user.bookTitle} </p>
+            <p> Author: {user.author} </p>
             <p> Book Language: {user.bookLanguage} </p>
             <p> ISBN: {user.isbn} </p>
             <p> Age Range: {user.ageRange} </p>
