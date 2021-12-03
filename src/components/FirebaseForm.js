@@ -43,10 +43,7 @@ function FirebaseForm(props) {
 
   const availability = [
     {
-      name: "",
-    },
-    {
-      name: "onloan",
+      name: "not available",
     },
     {
       name: "available",
@@ -206,6 +203,9 @@ function FirebaseForm(props) {
           setNewAvailable(event.target.value);
         }}
       >
+        <option key="default" value="" disabled selected>
+          Availability
+        </option>
         {availability.map((obj) => {
           return (
             <option key={obj.name} value={obj.name}>
