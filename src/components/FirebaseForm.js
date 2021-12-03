@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { db, getFirebase } from "./firebase-config";
 import { collection, getDocs, addDoc } from "firebase/firestore";
+const masterLanguages = require("./languages.json");
 // import {
 //   collection,
 //   getDocs,
@@ -52,15 +53,6 @@ function FirebaseForm(props) {
     },
   ];
 
-  const adult_child = [
-    {
-      name: "Adult",
-    },
-    {
-      name: "Child",
-    },
-  ];
-
   const [users, setUsers] = useState([]);
   const [newOwner, setNewOwner] = useState("");
   const [newBookTitle, setNewBookTitle] = useState("");
@@ -71,10 +63,8 @@ function FirebaseForm(props) {
   const [newAvailable, setNewAvailable] = useState(false);
   const [newPubYear, setNewPubYear] = useState("");
   const [newLocation, setNewLocation] = useState("");
-  const [newAdultOrChild, setNewAdultOrChild] = useState("");
   const [newComment, setNewComment] = useState("");
   const [newImage, setNewImage] = useState(null);
-
 
   const getUsers = async () => {
     const languagesCollectionRef = collection(db, newBookLanguage);
@@ -84,32 +74,41 @@ function FirebaseForm(props) {
   };
 
   const createUser = async () => {
-    const languagesCollectionRef = collection(db, newBookLanguage);
-    await addDoc(languagesCollectionRef, {
-      owner: newOwner,
-      bookTitle: newBookTitle,
-      author: newAuthor,
-      bookLanguage: newBookLanguage,
-      isbn: newISBN,
-      ageRange: newAgeRange,
-      available: newAvailable,
-      pubYear: newPubYear,
-      location: newLocation,
-      adultOrChild: newAdultOrChild,
-      comment: newComment,
-      image: newImage
-    });
-    getUsers();
+    if (
+      newBookLanguage !== "" &&
+      newOwner !== "" &&
+      newBookTitle !== "" &&
+      newAuthor !== "" &&
+      newAgeRange !== "" &&
+      newLocation !== ""
+    ) {
+      const languagesCollectionRef = collection(db, newBookLanguage);
+      await addDoc(languagesCollectionRef, {
+        owner: newOwner,
+        bookTitle: newBookTitle,
+        author: newAuthor,
+        bookLanguage: newBookLanguage,
+        isbn: newISBN,
+        ageRange: newAgeRange,
+        available: newAvailable,
+        pubYear: newPubYear,
+        location: newLocation,
+        comment: newComment,
+        image: newImage,
+      });
+      getUsers();
+    } else {
+      alert("YOU MUST FILL IN THE REQUIRED FIELDS!");
+    }
   };
-
 
   const onImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
-      // creates a DOMString containing a URL representing the object 
+      // creates a DOMString containing a URL representing the object
       // The URL lifetime is tied to the document in the window on which it was created. The new object URL represents the specified File object
       setNewImage(URL.createObjectURL(e.target.files[0]));
     }
-   }
+  };
 
   // const handleUpload = async (event) => {
   //   if (!firebase) return;
@@ -133,15 +132,26 @@ function FirebaseForm(props) {
       <h2>Add your book to the virtual shelf!</h2>
       <p>Fields marked with * are required</p>
       <label htmlFor="booklang">Book Language*</label>
-      <input required
-        type="text"
-        placeholder="book language"
+      <select
+        placeholder="booklang"
         onChange={(event) => {
           setNewBookLanguage(event.target.value);
         }}
-      />
+      >
+        <option key="default" value="" disabled selected>
+          Select Language*
+        </option>
+        {masterLanguages.map((obj) => {
+          return (
+            <option key={obj.name} value={obj.name}>
+              {obj.name}
+            </option>
+          );
+        })}
+      </select>
       <label htmlFor="owner">(Owner)*</label>
       <input
+        required
         type="text"
         placeholder="Owner"
         onChange={(event) => {
@@ -150,14 +160,16 @@ function FirebaseForm(props) {
       />
       <label htmlFor="booktitle">Book Title*</label>
       <input
+        required
         type="text"
         placeholder="book title"
         onChange={(event) => {
           setNewBookTitle(event.target.value);
         }}
       />
-      <label htmlFor="booktitle">Author</label>
+      <label htmlFor="booktitle">Author*</label>
       <input
+        required
         type="text"
         placeholder="book title"
         onChange={(event) => {
@@ -172,8 +184,9 @@ function FirebaseForm(props) {
           setnewISBN(event.target.value);
         }}
       />
-      <label htmlFor="ageRange">Age Range</label>
+      <label htmlFor="ageRange">Age Range*</label>
       <select
+        required
         placeholder="Age Range"
         onChange={(event) => {
           setNewAgeRange(event.target.value);
@@ -209,28 +222,15 @@ function FirebaseForm(props) {
           setNewPubYear(event.target.value);
         }}
       />
-      <label htmlFor="location">Location</label>
+      <label htmlFor="location">Location*</label>
       <input
+        required
         type="text"
         placeholder="location"
         onChange={(event) => {
           setNewLocation(event.target.value);
         }}
       />
-      <label htmlFor="adultOrChild">Adult or Child</label>
-      <select
-        onChange={(event) => {
-          setNewAdultOrChild(event.target.value);
-        }}
-      >
-        {adult_child.map((obj) => {
-          return (
-            <option key={obj.name} value={obj.name}>
-              {obj.name}
-            </option>
-          );
-        })}
-      </select>
       <label htmlFor="comment">Comment/Condition</label>
       <input
         type="text"
@@ -239,7 +239,7 @@ function FirebaseForm(props) {
           setNewComment(event.target.value);
         }}
       />
-      <label htmlFor="bookCover">Add  a picture</label>
+      <label htmlFor="bookCover">Add a picture</label>
       <input
         id="bookCover"
         type="file"
