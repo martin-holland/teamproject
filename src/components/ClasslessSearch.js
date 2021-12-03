@@ -53,12 +53,15 @@ function ClasslessSearch(props) {
                 return book.bookTitle.toLowerCase().includes(bookName.toLowerCase())})
                 .map((book) => (
                     <BookCard
+                    image={book.image}
                     id={book.id}
                     key={book.id}
                     title={book.bookTitle}
-                    // author={book.author}
                     available={book.available}
                     location={book.location}
+                    isbn={book.isbn}
+                    age={book.ageRange}
+                    author={book.author}
                 />
             ))}
         </div>
