@@ -1,20 +1,30 @@
-import React from 'react';
-import logo from './assets/logo.svg'; 
+import React from "react";
+import logo from "./assets/logo.svg";
+import { Link } from "react-router-dom";
 // import Nav from './Nav';
 
 const Header = () => {
   return (
     <header>
-       <div id="logo">
-                    <img src={logo} alt="Logo"/>
-        </div>
-        <h1>Welcome to The Virtual Shelf</h1>
-        <br/>
-        <p>Find your next read from our vide selection of books</p>
-        <p>Finding books with our efficient search function is quick and easy</p>
-        <p>Enjoy your stay!</p> 
+      <div id="logo">
+        <img src={logo} alt="Logo" />
+      </div>
+      <h1>Welcome to The Virtual Shelf</h1>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+        </ul>
+      </nav>
+      <button className="addbook">
+        <Link to="/addbook">Add Book on the Shelf</Link>
+      </button>
     </header>
-);
-}
+  );
+};
 
 export default Header;
