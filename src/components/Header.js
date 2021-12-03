@@ -20,9 +20,13 @@ const Header = () => {
           </li>
         </ul>
       </nav>
-      <button className="addbook">
-        <Link to="/addbook">Add Book on the Shelf</Link>
-      </button>
+      <label htmlFor="addbook">
+        <div className="addbook">
+          <Link id="addbook" to="/addbook">
+            Add Book on the Shelf
+          </Link>
+        </div>
+      </label>
     </header>
   );
 };
