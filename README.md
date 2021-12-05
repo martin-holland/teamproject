@@ -19,9 +19,21 @@ Built with:
 
 Live Page not ready yet.
 
+### Login testing:
+username: user1
+password: passAB
+
+The token will be stored in localeStorage and will be remembered after closing tab. There is no log out :D
+To clean the token go to inspect tool> Application> Local Storage and delete the token (and you are logged out).
+
 ## Screenshot
 
 ## Dependancies
+
+To test Login feature with mock server:
+```shell
+npm install --save-dev express cors
+```
 
 ## Sources
 

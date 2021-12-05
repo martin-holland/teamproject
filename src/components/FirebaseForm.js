@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { db, getFirebase } from "./firebase-config";
+import Login from './Login';
+import useToken from './useToken';
 import { collection, getDocs, addDoc } from "firebase/firestore";
 const masterLanguages = require("./languages.json");
 // import {
@@ -124,6 +126,11 @@ function FirebaseForm(props) {
   //   }
   // };
 
+  // show Login page if not logged in (token in localeStorage)
+  const { token, setToken } = useToken();
+  if (!token) {
+    return <Login setToken={setToken} />
+  }
   return (
     <div className="firebaseform">
       <h2>Add your book to the virtual shelf!</h2>
