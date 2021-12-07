@@ -7,6 +7,7 @@ const Main = () => {
       <main>
         <ClasslessSearch />
       </main>
+      
     </div>
   );
 };
