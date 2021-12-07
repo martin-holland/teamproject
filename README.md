@@ -19,10 +19,34 @@ Built with:
 
 Live Page not ready yet.
 
+### Login testing:
+username: user1
+password: passAB
+
+The token will be stored in localeStorage and will be remembered after closing tab. There is no log out :D
+To clean the token go to inspect tool> Application> Local Storage and delete the token (and you are logged out).
+
 ## Screenshot
 
 ## Dependancies
 
+To test Login feature with mock server:
+```shell
+npm install --save-dev express cors
+```
+
+Remember to run:
+```shell
+node server.js
+```
+
+Heart icons for favorites:
+```shell
+npm i --save @fortawesome/fontawesome-svg-core
+npm install --save @fortawesome/free-solid-svg-icons
+npm install --save @fortawesome/react-fontawesome
+npm i -S @fortawesome/free-regular-svg-icons
+```
 ## Sources
 
 ### JSON Server For Local Testing
@@ -41,6 +65,11 @@ Margit Tennosaar - Tutor and Teacher
 - [LinkedIn](https://www.linkedin.com/in/margittennosaar/)
 - Author of Languages JSON:
 - Languages JSON source: https://stackoverflow.com/questions/3217492/list-of-language-codes-in-yaml-or-json
+
+## Assets credits:
+
+- Empty book cover by <a href="https://unsplash.com/@mediamodifier?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Mediamodifier</a> on <a href="https://unsplash.com/s/photos/book-cover?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
 
 ## Requirements
 

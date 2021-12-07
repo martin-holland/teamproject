@@ -16,15 +16,15 @@ function ClasslessSearch(props) {
 
     const handleSubmit = e => {
         e.preventDefault();
-        console.log('Submit', bookName, language.toLowerCase());
+        // console.log('Submit', bookName, language.toLowerCase());
         getBooks();
     }
 
     const getBooks = async () => {
-        const data = await getDocs(collection(db, language.toLowerCase()));
+        const data = await getDocs(collection(db, language));
         console.log(data.docs.map(doc => doc.data()));
         updateFoundBooks(data.docs.map(doc => ({ ...doc.data(), id: doc.id }))); // spreading into foundBooks (array, not array into array)
-        console.log('foundBooks: ', foundBooks);
+        // console.log('foundBooks: ', foundBooks);
         return foundBooks;
     };
 
@@ -41,6 +41,9 @@ function ClasslessSearch(props) {
             <select 
                 name="searchLanguage"
                 onChange={e => updateLanguage(e.target.value)}>
+                    <option key="default" value="" disabled selected>
+                        Select Language*
+                    </option>
                     {languages.map((langObj) => <option key={langObj.name} value={langObj.name}>{langObj.name}</option>)
                     }
             </select>
