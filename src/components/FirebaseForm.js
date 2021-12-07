@@ -95,7 +95,7 @@ function FirebaseForm(props) {
         comment: newComment,
         image: newImage,
       });
-      getUsers();
+ //    getUsers();
     } else {
       alert("YOU MUST FILL IN THE REQUIRED FIELDS!");
     }

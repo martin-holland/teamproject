@@ -24,10 +24,25 @@
   cursor: pointer;
 }
 
-img {
+.book_cover {
   position: relative;
-  align-self: center;
+  align-self: left;
   border-radius: 1px;
+}
+
+.fav_button {
+  position: relative;
+  right: -6rem;
+  top: -1rem;
+  background-color: transparent;
+  border: none;
+  max-width: 2rem;
+}
+
+.fav_button:hover {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 h1 {
@@ -40,12 +55,34 @@ p {
   margin: 0.1rem;
 }
 
+/* 
+the whole card is a link */
+.card_wrapper a {
+  text-decoration: none;
+  color: black;
+}
+
+.author {
+  margin-bottom: 0.6rem;
+}
+
 #false {
   color: grey;
   opacity: 30%;
 }
 
 #false:hover {
-  box-shadow: revert;
+  /* box-shadow: revert; */
   cursor: auto;
+}
+
+img {
+  max-height: 4rem;
+}
+
+.cover_icon_wrapper {
+  min-width: 13rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
