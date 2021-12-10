@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import { db, getFirebase } from "./firebase-config";
 import Login from './Login';
 import useToken from './useToken';
 import { collection, getDocs, addDoc } from "firebase/firestore";
+import PopUp from "./PopUp";
 const masterLanguages = require("./languages.json");
 // import {
 //   collection,
@@ -64,6 +65,7 @@ function FirebaseForm(props) {
   const [newLocation, setNewLocation] = useState("");
   const [newComment, setNewComment] = useState("");
   const [newImage, setNewImage] = useState(null);
+  const [showPopUp, setShowPopUp] = useState(false);
 
   const getUsers = async () => {
     const languagesCollectionRef = collection(db, newBookLanguage);
@@ -95,11 +97,22 @@ function FirebaseForm(props) {
         comment: newComment,
         image: newImage,
       });
+      setShowPopUp(true);
+
  //    getUsers();
     } else {
-      alert("YOU MUST FILL IN THE REQUIRED FIELDS!");
+      alert("Please fill in the required fields");
     }
   };
+
+  useEffect( () => {
+    console.log(showPopUp);
+  }, [showPopUp]);
+
+  const closeHandler = () => {
+    setShowPopUp(false);
+    window.location.reload();
+  }
 
   const onImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -255,6 +268,8 @@ function FirebaseForm(props) {
         onChange={onImageChange}
       />
       <button onClick={createUser}>Add Book</button>
+      {(showPopUp === true) && <PopUp close={ closeHandler } />}
+
     </div>
   );
 }
