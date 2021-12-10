@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import About from "./components/About";
 import Main from "./components/Main";
+import FAQ from "./components/FAQ";
 import BookSingle from "./components/BookSingle";
 import {
   BrowserRouter,
@@ -27,6 +28,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/about" element={<About />} />
+          <Route path="/FAQ" element={<FAQ />} />
           <Route path="/addbook" element={<FirebaseForm />} />
           <Route path="/search" element={<ClasslessSearch />} />
           <Route path="/search/:id" element={<RouteWrapper />} />

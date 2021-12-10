@@ -7,9 +7,23 @@
   box-shadow: none;
 }
 
+html {
+  height: 100%;
+}
+
+body {
+  /* background: rgb(250, 240, 230); */
+  background: rgb(250, 240, 230);
+  background: radial-gradient(
+    circle,
+    rgba(250, 240, 230, 1) 0%,
+    rgba(188, 152, 126, 1) 100%
+  );
+  background-size: 100% 100px;
+}
+
 header {
   width: 100%;
-  background-color: #e6c1ae;
   color: #4d2c06;
   padding: 2rem;
   display: flex;
@@ -20,13 +34,11 @@ header {
 
 header h1 {
   font-family: "Poiret One", cursive;
-  background-color: #e6c1ae;
   font-size: 3rem;
 }
 
 header p {
   font-family: "Open Sans", sans-serif;
-  background-color: #e6c1ae;
   padding: 0.5rem;
   font-size: 1.2rem;
 }
@@ -37,14 +49,38 @@ header img {
   float: left;
   padding: 20px;
   margin-right: 10%;
-  background: no-repeat fixed center center/cover;
-  background-color: #e6c1ae;
+}
+
+ul {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  padding: 20px;
+}
+
+header a {
+  font-size: 1rem;
+  text-decoration: underline;
+}
+
+a {
+  color: #4d2c06;
+  font-family: "Open Sans", sans-serif;
+  padding: 20px;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 div .bookform {
   display: flex;
   justify-content: center;
-  background-color: #f0e0d2;
+  /* background-color: #f0e0d2; */
 }
 
 .bookform {
@@ -65,7 +101,7 @@ div .bookform {
   margin: 0;
   align-content: center;
   font-family: "Open Sans", sans-serif;
-  background-color: #f0e0d2;
+  /* background-color: #f0e0d2; */
 }
 
 form label,
@@ -77,7 +113,7 @@ option {
   border-style: 1px solid;
   margin: 0;
   padding: 3px;
-  background-color: #f0e0d2;
+  /* background-color: #f0e0d2; */
 }
 
 button {
@@ -92,33 +128,39 @@ button {
 }
 
 button:hover {
-  background-color: #c7916e;
-  box-shadow: 0 0 5px gray;
+  box-shadow: 0 0 5px #4d2c06;
   border-radius: 5%;
   display: inline-block;
-  margin: 1rem;
   text-transform: capitalize;
   cursor: pointer;
 }
 
 footer {
-  background-color: #e6c1ae;
-  color: #4d2c06;
-  height: 10rem;
+  position: relative;
+  bottom: 0;
   width: 100%;
-  padding: 2rem;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  color: #4d2c06;
+  text-align: center;
+  padding: 5px;
+  margin-top: 25px;
 }
 
+footer h4 {
+  font-family: "Open Sans", sans-serif;
+  color: #4d2c06;
+}
+
+footer a,
 footer p {
   font-family: "Open Sans", sans-serif;
-  background-color: #e6c1ae;
+  text-decoration: none;
+  font-size: 0.75rem;
+  display: inline-block;
+  color: #4d2c06;
 }
 
 .FirebaseForm {
-  background-color: #f0e0d2;
+  /* background-color: #f0e0d2; */
   color: #4d2c06;
   font-family: "Open Sans", sans-serif;
   font-size: 0.5rem;
@@ -126,7 +168,7 @@ footer p {
 }
 
 .container {
-  background-color: #f0e0d2;
+  /* background-color: #f0e0d2; */
   width: 100%;
   padding: 2rem;
   font-family: "Open Sans", sans-serif;
@@ -146,16 +188,15 @@ footer p {
 }
 
 .herobanner {
-  background-color: #f0e0d2;
   display: flex;
   justify-content: center;
-  width: 100%;
 }
 
 .herobanner img {
-  width: 60%;
+  width: 70%;
   height: auto;
   object-fit: cover;
+  align-self: center;
 }
 
 .firebaseform {

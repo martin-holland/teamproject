@@ -1,8 +1,10 @@
 import React from "react";
 import FAQ from "./FAQ";
+import { Link } from "react-router-dom";
 
 const About = () => {
   return (
+    <div>
     <div class="container">
       <h2>About The Virtual Shelf</h2>
       <p>
@@ -31,17 +33,16 @@ const About = () => {
       </p>
 
       <p>
-        If you have any questions, please check out our{" "}
-        <href src="./FAQ.js">Frequently Asked Questions.</href>
+      If you have any questions, please check out our<Link to="/FAQ">Frequently Asked Questions.</Link>
       </p>
-
-      <div className="herobanner">
-        <img
-          src="https://images.unsplash.com/photo-1548048026-5a1a941d93d3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1770&q=80"
-          alt="library shelf"
-        />
-      </div>
     </div>
+    <div className="herobanner">
+    <img
+      src="https://images.unsplash.com/photo-1548048026-5a1a941d93d3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1770&q=80"
+      alt="library shelf"
+    />
+  </div>
+  </div>
   );
 };
 
