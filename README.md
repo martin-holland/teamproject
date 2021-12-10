@@ -23,8 +23,7 @@ Live Page not ready yet.
 username: user1
 password: passAB
 
-The token will be stored in localeStorage and will be remembered after closing tab. There is no log out :D
-To clean the token go to inspect tool> Application> Local Storage and delete the token (and you are logged out).
+The token will be stored in localeStorage and will be remembered after closing tab.
 
 ## Screenshot
 
