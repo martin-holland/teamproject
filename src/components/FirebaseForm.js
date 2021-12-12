@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import { db, getFirebase } from "./firebase-config";
 import Login from './Login';
 import useToken from './useToken';
 import { collection, getDocs, addDoc } from "firebase/firestore";
-const masterLanguages = require("./languages.json");
+import PopUp from "./PopUp";
 // import {
 //   collection,
 //   getDocs,
@@ -15,43 +15,11 @@ const masterLanguages = require("./languages.json");
 
 // const firebase = getFirebase();
 
+const masterLanguages = require("./languages.json");
+const availability = require("./availability.json");;
+const ageRanges = require("./ageRanges.json");;
+
 function FirebaseForm(props) {
-  const ageRanges = [
-    {
-      name: "",
-    },
-    {
-      name: "Adult",
-    },
-    {
-      name: "Newborns to Age 3",
-    },
-    {
-      name: "Ages 3 - 8",
-    },
-    {
-      name: "Early Readers - Ages 5-9",
-    },
-    {
-      name: "First Chapter Books - Ages 7-10",
-    },
-    {
-      name: "Middle Grade Books - Ages 8-12",
-    },
-    {
-      name: "Young Adult, Ages 12+",
-    },
-  ];
-
-  const availability = [
-    {
-      name: "not available",
-    },
-    {
-      name: "available",
-    },
-  ];
-
   const [users, setUsers] = useState([]);
   const [newOwner, setNewOwner] = useState("");
   const [newBookTitle, setNewBookTitle] = useState("");
@@ -64,6 +32,7 @@ function FirebaseForm(props) {
   const [newLocation, setNewLocation] = useState("");
   const [newComment, setNewComment] = useState("");
   const [newImage, setNewImage] = useState(null);
+  const [showPopUp, setShowPopUp] = useState(false);
 
   const getUsers = async () => {
     const languagesCollectionRef = collection(db, newBookLanguage);
@@ -95,11 +64,22 @@ function FirebaseForm(props) {
         comment: newComment,
         image: newImage,
       });
+      setShowPopUp(true);
+
  //    getUsers();
     } else {
-      alert("YOU MUST FILL IN THE REQUIRED FIELDS!");
+      alert("Please fill in the required fields");
     }
   };
+
+  useEffect( () => {
+    console.log(showPopUp);
+  }, [showPopUp]);
+
+  const closeHandler = () => {
+    setShowPopUp(false);
+    window.location.reload();
+  }
 
   const onImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -125,6 +105,11 @@ function FirebaseForm(props) {
   //     console.log("error", error);
   //   }
   // };
+
+  const logoutHandler = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+  }
 
   // show Login page if not logged in (token in localeStorage)
   const { token, setToken } = useToken();
@@ -255,6 +240,9 @@ function FirebaseForm(props) {
         onChange={onImageChange}
       />
       <button onClick={createUser}>Add Book</button>
+      {(showPopUp === true) && <PopUp close={ closeHandler } />}
+
+        <button className="fake_logout" onClick={logoutHandler}>LOG OUT</button>
     </div>
   );
 }

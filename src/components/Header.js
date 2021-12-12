@@ -18,15 +18,17 @@ const Header = () => {
           <li>
             <Link to="/about">About</Link>
           </li>
-        </ul>
-      </nav>
+          <li>
       <label htmlFor="addbook">
-        <div className="addbook">
+        {/* <div className="addbook"> */}
           <Link id="addbook" to="/addbook">
             Add Book on the Shelf
           </Link>
-        </div>
+        {/* </div> */}
       </label>
+        </li>
+      </ul>
+      </nav>
     </header>
   );
 };
