@@ -4,6 +4,8 @@ import Login from './Login';
 import useToken from './useToken';
 import { collection, getDocs, addDoc } from "firebase/firestore";
 import PopUp from "./PopUp";
+import PopUpFields from "./PopUpFields";
+import Library from './Library';
 // import {
 //   collection,
 //   getDocs,
@@ -33,6 +35,7 @@ function FirebaseForm(props) {
   const [newComment, setNewComment] = useState("");
   const [newImage, setNewImage] = useState(null);
   const [showPopUp, setShowPopUp] = useState(false);
+  const [showPopUpFields, setShowPopUpFields] = useState(false);
 
   const getUsers = async () => {
     const languagesCollectionRef = collection(db, newBookLanguage);
@@ -66,9 +69,9 @@ function FirebaseForm(props) {
       });
       setShowPopUp(true);
 
- //    getUsers();
+      getUsers();
     } else {
-      alert("Please fill in the required fields");
+      setShowPopUpFields(true);
     }
   };
 
@@ -79,6 +82,10 @@ function FirebaseForm(props) {
   const closeHandler = () => {
     setShowPopUp(false);
     window.location.reload();
+  }
+
+  const closePopUpFields = () => {
+    setShowPopUpFields(false);
   }
 
   const onImageChange = (e) => {
@@ -241,7 +248,8 @@ function FirebaseForm(props) {
       />
       <button onClick={createUser}>Add Book</button>
       {(showPopUp === true) && <PopUp close={ closeHandler } />}
-
+      {showPopUpFields && <PopUpFields close={ closePopUpFields } lang={newBookLanguage} aut={newAuthor} owner={newOwner} title={newBookTitle} age={newAgeRange} loc={newLocation}/>}
+       {newBookLanguage && <Library language= {newBookLanguage} />}
         <button className="fake_logout" onClick={logoutHandler}>LOG OUT</button>
     </div>
   );
