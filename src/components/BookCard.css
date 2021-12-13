@@ -22,7 +22,7 @@
 
 .card:hover {
   box-shadow: 3px 3px 5px #4d2c06;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .book_cover {
@@ -86,4 +86,8 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+}
+
+.delete_butt {
+  width: 12rem;
 }
