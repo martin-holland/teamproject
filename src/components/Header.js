@@ -19,6 +19,12 @@ const Header = () => {
             <Link to="/about"><strong>About</strong></Link>
           </li>
           <li>
+            <Link to="/"><strong>Search by title</strong></Link>
+          </li>
+          <li>
+            <Link to="/searchAge"><strong>Search by age</strong></Link>
+          </li>
+          <li>
       <label htmlFor="addbook">
         {/* <div className="addbook"> */}
           <Link id="addbook" to="/addbook">

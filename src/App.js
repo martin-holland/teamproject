@@ -7,6 +7,7 @@ import About from "./components/About";
 import Main from "./components/Main";
 import FAQ from "./components/FAQ";
 import BookSingle from "./components/BookSingle";
+import SearchByAge from "./components/SearchByAge";
 import {
   BrowserRouter,
   Link,
@@ -31,6 +32,7 @@ function App() {
           <Route path="/FAQ" element={<FAQ />} />
           <Route path="/addbook" element={<FirebaseForm />} />
           <Route path="/search" element={<ClasslessSearch />} />
+          <Route path="/searchAge" element={<SearchByAge />} />
           <Route path="/search/:id" element={<RouteWrapper />} />
         </Routes>
         <Footer />
