@@ -1,5 +1,5 @@
 import { useState, useEffect} from "react";
-import { db, getFirebase } from "./firebase-config";
+import { db } from "./firebase-config";
 import Login from './Login';
 import useToken from './useToken';
 import { collection, getDocs, addDoc } from "firebase/firestore";

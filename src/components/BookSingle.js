@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+// import { useParams, useNavigate } from 'react-router-dom';
 
 const BookSingle = ({
     id,
@@ -11,26 +11,18 @@ const BookSingle = ({
     age,
     image
 }) => {
-    let {book} = useParams();
+    // let {book} = useParams();
     // let navigate = useNavigate();
 
     return (
         <div className="singleBook">
-            <div className="singleBook">
-            <p>This is the page for a single book with its complete details</p>
-            <p> Book Title: {} </p>
-            <p> Author: {} </p>
-            <p> Book Language: {} </p>
-            <p> Owner: {} </p>
-            <p> ISBN: {} </p>
-            <p> Age Range: {} </p>
-            <p> Available: {} </p>
-            <p> Publication Year: {} </p>
-            <p> Location: {} </p>
-            <p> Comments: {} </p>
-            <button>
-              Request Book
-            </button>
+            <div className="single_Book">
+                <p>Contact the owner of the book:</p>
+                <textarea id="story" name="story" rows="5" cols="33">
+                </textarea>
+                <button>
+                SEND MESSAGE
+                </button>
             </div>
             <div>
                 {/* <button onClick={() => navigate(-1)}>

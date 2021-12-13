@@ -286,3 +286,10 @@ input {
 .individualbook img {
   float: right;
 }
+
+
+/*** SingleBook ***/
+.single_Book {
+  display: flex;
+  flex-direction: column;
+}
