@@ -1,10 +1,11 @@
 import React from "react";
 import "./ClasslessSearch.css";
 import { getLangs } from "./functionsLibrary";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { db } from "./firebase-config";
 import { collection, getDocs } from "firebase/firestore";
 import BookCard from "./BookCard";
+import PopUpLanguage from './PopUpLanguage';
 
 // name and native name for languages:
 const languages = getLangs();
@@ -12,12 +13,17 @@ const languages = getLangs();
 function ClasslessSearch(props) {
     const [foundBooks, updateFoundBooks] = useState([]);
     const [bookName, setBookName] = useState("");
-    const [language, updateLanguage] = useState(languages.map((obj) => obj.name));
+    const [language, updateLanguage] = useState("");
+    const [showPopUpLanguage, setShowPopUpLanguage] = useState(false);
 
     const handleSubmit = e => {
         e.preventDefault();
         // console.log('Submit', bookName, language.toLowerCase());
-        getBooks();
+        if (language !== "") {
+            getBooks();
+        } else {
+            setShowPopUpLanguage(true);
+        }
     }
 
     const getBooks = async () => {
@@ -27,6 +33,14 @@ function ClasslessSearch(props) {
         // console.log('foundBooks: ', foundBooks);
         return foundBooks;
     };
+
+    useEffect( () => {
+    console.log(showPopUpLanguage);
+    }, [showPopUpLanguage]);
+    
+    const closePopupLanguage = () => {
+        setShowPopUpLanguage(false);
+    }
 
     return (
         <div className="searchByLang">
@@ -67,6 +81,7 @@ function ClasslessSearch(props) {
                     author={book.author}
                 />
             ))}
+        {showPopUpLanguage && <PopUpLanguage close={ closePopupLanguage } />}
         </div>
         </div>
     );
