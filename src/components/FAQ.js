@@ -18,9 +18,9 @@ const FAQ = () => {
                 <p>Q. How do I submit a book to the Virtual Shelf?</p>
                 <p>A. This has been made as simple as possible. All you have to do is create a username & password after which you submit your book details with the form provided. That's it!</p>
 
-            <h3>Terms and Conditions</h3>
-            <p>Q.</p>
-            <p>A.</p>
+            <h3>Payments</h3>
+            <p>Q. Are there any costs using the Virtual Shelf?</p>
+            <p>A. Using the site is free of charge. Also, all the books are on loan only, so no payments are made during the process.</p>
 
         </div>
     );

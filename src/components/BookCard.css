@@ -77,7 +77,7 @@ the whole card is a link */
   cursor: auto;
 }
 
-img {
+.card_wrapper img {
   max-height: 4rem;
 }
 
