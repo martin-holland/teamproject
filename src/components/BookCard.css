@@ -2,11 +2,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items:center;
+  align-items: center;
   margin: 0.5rem 0.6rem;
   padding: 0.3rem;
   min-width: 12rem;
-  width: 13rem auto;
+  min-height: 20rem;
+  width: 13rem;
+  height: 21rem;
   margin: 0.6rem;
   padding: 1rem;
   border: 1px solid black;
@@ -21,22 +23,24 @@
 
 .card:hover {
   box-shadow: 3px 3px 5px #4d2c06;
-  /* cursor: pointer; */
 }
 
 .book_cover {
   position: relative;
-  align-self: left;
+  align-self: center;
   border-radius: 1px;
 }
 
 .fav_button {
   position: relative;
-  right: -6rem;
-  top: -1rem;
+  float: right;
+  right: -90px;
+  top: -20px;
+  align-self: left;
   background-color: transparent;
   border: none;
   max-width: 2rem;
+  padding: 10px;
 }
 
 .fav_button:hover {
@@ -47,11 +51,11 @@
 
 h1 {
   margin-top: 1rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 p {
-  font-size: 1rem;
+  font-size: 0.8rem;
   margin: 0.1rem;
 }
 
@@ -69,6 +73,10 @@ the whole card is a link */
 #false {
   color: grey;
   opacity: 30%;
+  min-width: 12rem;
+  min-height: 20rem;
+  width: 13rem;
+  height: 21rem;
 }
 
 #false:hover {
