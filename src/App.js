@@ -17,8 +17,9 @@ import {
 
 const RouteWrapper = (props) => {
   const params = useParams();
-  return <BookSingle params={params}{...props} />
-}
+  console.log(params);
+  return <BookSingle params={params} />;
+};
 
 function App() {
   return (
