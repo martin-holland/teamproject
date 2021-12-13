@@ -1,4 +1,5 @@
 import React from 'react';
+import "./BookSingle.css";
 // import { useParams, useNavigate } from 'react-router-dom';
 
 const BookSingle = ({
@@ -20,7 +21,7 @@ const BookSingle = ({
                 <p>Contact the owner of the book:</p>
                 <textarea id="story" name="story" rows="5" cols="33">
                 </textarea>
-                <button>
+                <button className="send_message">
                 SEND MESSAGE
                 </button>
             </div>
