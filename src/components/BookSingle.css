@@ -1,0 +1,27 @@
+.singleBook {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  margin: 20px;
+}
+
+#story {
+  background-color: #f0e0d2;
+  font-family: "Open Sans", sans-serif;
+  color: #4d2c06;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.single_Book {
+  width: 60%;
+}
+
+.single_Book p {
+  margin: 20px 0 20px 0;
+}
+
+.send_message {
+  margin: 20px;
+}

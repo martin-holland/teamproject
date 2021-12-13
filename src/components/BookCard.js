@@ -51,7 +51,7 @@ const BookCard = ({
                     <p>Age: {age}</p>
                     <p>Location: {location}</p>
                     <Link to={`/search/:${id}`} target="_blank">
-                        <button onClick={() => setShowContactRequest(true)}>
+                        <button className="request_button" onClick={() => setShowContactRequest(true)}>
                         Request Book
                         </button>
                     </Link>

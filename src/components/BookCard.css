@@ -2,18 +2,17 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items:center;
   margin: 0.5rem 0.6rem;
   padding: 0.3rem;
   min-width: 12rem;
-  width: 13rem;
+  width: 13rem auto;
   margin: 0.6rem;
   padding: 1rem;
   border: 1px solid black;
   border-radius: 3px;
-  box-shadow: 0 0 2px grey;
-  background-color: #fff5ee;
-  /* background-color: red; */
+  box-shadow: 0 0 5px grey;
+  opacity: 90%;
 }
 
 .card h2 {
@@ -79,6 +78,7 @@ the whole card is a link */
 
 .card_wrapper img {
   max-height: 4rem;
+  float: right;
 }
 
 .cover_icon_wrapper {
