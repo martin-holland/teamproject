@@ -3,20 +3,21 @@ import "./library.css";
 import { useState, useEffect } from "react";
 import { db } from "./firebase-config";
 import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
+import BookCardOwner from "./BookCardOwner";
 
-function Library(props) {
+function Library({language}) {
   const [users, setUsers] = useState([]);
 
-  const languagesCollectionRef = collection(db, props.language);
-
   const getUsers = async () => {
-    const data = await getDocs(languagesCollectionRef);
-    console.log(data);
-    setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))); //use spread operator to return all fields from data
+    if (language) {
+      const data = await getDocs(collection(db, language));
+      console.log(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))); //use spread operator to return all fields from data
+    }
   };
 
   const deleteUser = async (id) => {
-    const userDoc = doc(db, props.language, id);
+    const userDoc = doc(db, language, id);
     await deleteDoc(userDoc);
     getUsers();
   };
@@ -26,38 +27,23 @@ function Library(props) {
   }, []);
 
   return (
-    <div className="library">
+    <div className="search_results">
       {users.map((user, key) => {
         return (
-          <div className="individualbook" key={key}>
-            {" "}
-            <img
-              alt="book"
-              src={`https://covers.openlibrary.org/b/isbn/${user.isbn}-S.jpg`}
-            ></img>
-            <p> Owner: {user.owner} </p>
-            <p> Book Title: {user.bookTitle} </p>
-            <p> Author: {user.author} </p>
-            <p> Book Language: {user.bookLanguage} </p>
-            <p> ISBN: {user.isbn} </p>
-            <p> Age Range: {user.ageRange} </p>
-            <p> Available: {user.available} </p>
-            <p> Publication Year: {user.pubYear} </p>
-            <p> Location: {user.location} </p>
-            <p> Adult or Child: {user.adultOrChild} </p>
-            <p> Comments: {user.comment} </p>
-            <button
-              onClick={() => {
-                deleteUser(user.id);
-              }}
-            >
-              {" "}
-              Delete Book
-            </button>
+            <BookCardOwner
+            image={user.image}
+            id={user.id}
+            key={user.id}
+            title={user.bookTitle}
+            available={user.available}
+            location={user.location}
+            isbn={user.isbn}
+            age={user.ageRange}
+            author={user.author}
+            deleteBook={deleteUser}
+            />
+      )})}
           </div>
-        );
-      })}
-    </div>
   );
 }
 
