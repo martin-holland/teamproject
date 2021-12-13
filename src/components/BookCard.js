@@ -31,18 +31,19 @@ const BookCard = ({
 
   return (
     <div className="card_wrapper">
-      <Link to={`/search/:${id}/:${title}/`} target="_blank">
-        <div className="card" key={id} id={`${available}`}>
-          <button className="fav_button">
-            <FontAwesomeIcon icon={heartRegular} />
-          </button>
-          <img className="book_cover" alt="book cover" src={coverImage()} />
-          <h1>{title}</h1>
-          <p className="author">{author}</p>
-          <p>Age: {age}</p>
-          <p>Location: {location}</p>
-        </div>
-      </Link>
+      {/* <Link to={`/search/:${id}/:${title}/`} target="_blank">
+      <Link to={{ pathname: `/search/:${id}`, state: { foo: "bar" } }}> */}
+      <div className="card" key={id} id={`${available}`}>
+        <button className="fav_button">
+          <FontAwesomeIcon icon={heartRegular} />
+        </button>
+        <img className="book_cover" alt="book cover" src={coverImage()} />
+        <h1>{title}</h1>
+        <p className="author">{author}</p>
+        <p>Age: {age}</p>
+        <p>Location: {location}</p>
+      </div>
+      {/* </Link> */}
     </div>
   );
 };
