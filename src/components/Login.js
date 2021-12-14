@@ -43,7 +43,7 @@ const Login = ({ setToken }) => {
                 <label htmlFor="username">Username:</label>
                 <input type="text" id="username" name="username" onChange={e => setUserName(e.target.value)}/>
                 <label htmlFor="password">Password:</label>
-                <input type="text" id="password" name="password" onChange={e => setPassword(e.target.value)}/>
+                <input type="password" id="password" name="password" onChange={e => setPassword(e.target.value)}/>
                 <div>
                     <button type="submit">Submit</button>
                 </div>

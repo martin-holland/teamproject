@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const About = () => {
   return (
     <div>
-    <div class="container">
+    <div class="container1">
       <h2>About The Virtual Shelf</h2>
       <p>
         The Virtual Shelf is a place where you can find books for yourself and
@@ -13,16 +13,13 @@ const About = () => {
         read.
       </p>
 
-      <p>The idea for this community is very simple:</p>
-
-      <p>
+      <p>The idea for this community is very simple:
         If you have any books in your home, which you are not reading anymore
         you can share them with others. You can either loan them or give them
         away. The books can be in any language and for kids or adults or
         anything in between. The main idea is, that no money is changing hands.
         Submitting your book for loan is simple to do on our site.{" "}
       </p>
-
       <p>
         You are able to find books with the help of our search in several
         languages and plenty of selection for both children and adults.
@@ -31,7 +28,6 @@ const About = () => {
         you can pay it forward and post the book on your profile so someone else
         can enjoy it.
       </p>
-
       <p>
       If you have any questions, please check out the<Link to="/FAQ">Frequently Asked Questions.</Link>
       </p>
