@@ -1,7 +1,13 @@
- stages {
-        stage('Bui') {
+pipeline {
+    agent any
+    
+    tools {nodejs "node"}
+    
+    stages {
+        stage('Build') {
             steps {
-                sh 'npm start'
+                sh 'npm install'
             }
         }
         }
+}
