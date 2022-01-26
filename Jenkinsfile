@@ -13,7 +13,6 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'testing the app'
-                sh 'npm test --passWithNoTests'
             }
         }
         stage('Deploy') {
