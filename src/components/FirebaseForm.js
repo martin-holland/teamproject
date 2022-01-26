@@ -18,8 +18,8 @@ import Library from './Library';
 // const firebase = getFirebase();
 
 const masterLanguages = require("./languages.json");
-const availability = require("./availability.json");;
-const ageRanges = require("./ageRanges.json");;
+const availability = require("./availability.json");
+const ageRanges = require("./ageRanges.json");
 
 function FirebaseForm(props) {
   const [users, setUsers] = useState([]);
