@@ -1,13 +1,8 @@
-pipeline {
-    agent any
-    
-    tools {nodejs "node"}
-    
-    stages {
-        stage('Build') {
+ stages {
+        stage('Bui') {
             steps {
-                sh 'npm build'
+                sh 'npm start'
+                sh 'react-scripts build'
             }
         }
         }
-}
