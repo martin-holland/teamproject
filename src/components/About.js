@@ -9,7 +9,7 @@ const About = () => {
       <h2>About The Virtual Shelf</h2>
       <p>
         The Virtual Shelf is a place where you can find books for yourself and
-        your family to read. You can also share your own books for others to
+        your family to read. You are able to share your own books for others to
         read.
       </p>
 
