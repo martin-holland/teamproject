@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import "./BookCard.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faHeart as heartSolid } from '@fortawesome/free-solid-svg-icons';
-import { faHeart as heartRegular } from "@fortawesome/free-regular-svg-icons";
-import { Link } from "react-router-dom";
+// import React, { useState } from "react";
+// import "./BookCard.css";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// // import { faHeart as heartSolid } from '@fortawesome/free-solid-svg-icons';
+// import { faHeart as heartRegular } from "@fortawesome/free-regular-svg-icons";
+// import { Link } from "react-router-dom";
 
 // deconstruct props, pass objects directly
 const BookCard = ({
