@@ -2,7 +2,7 @@
         stage('Bui') {
             steps {
                 sh 'npm start'
-                sh 'npm run build'
+                sh 'react-scripts build'
             }
         }
         }
