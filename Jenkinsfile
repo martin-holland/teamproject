@@ -10,7 +10,7 @@ pipeline {
             }
         }
         }
-    stage('Test') {
+        stage('Test') {
             steps {
                 sh 'react-scripts test'
             }
