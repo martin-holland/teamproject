@@ -4,10 +4,20 @@ pipeline {
     tools {nodejs "node"}
     
     stages {
-        stage('Build') {
+        stage('build') {
             steps {
-                sh 'npm install'
-                sh 'npm build'
+                echo 'building the app'
+                sh 'node App.js'
+            }
+        }
+        stage('test') {
+            steps {
+                echo 'testing the app'
+            }
+        }
+        stage('deploy') {
+            steps {
+                echo 'deploying the app'
             }
         }
         }
