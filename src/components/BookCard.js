@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./BookCard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faHeart as heartSolid } from '@fortawesome/free-solid-svg-icons';
@@ -22,7 +22,7 @@ const BookCard = ({
     // user pic, isbn pic, placeholder pic
     if (image === null) {
       // do not change to !==
-      if (isbn != 0) {
+      if (isbn !== 0) {
         return `https://covers.openlibrary.org/b/isbn/${isbn}-S.jpg`;
       } else {
         return require("./assets/empty_cover.jpg").default;
@@ -44,10 +44,7 @@ const BookCard = ({
         <p>Age: {age}</p>
         <p>Location: {location}</p>
         <Link to={`/search/:${id}`} target="_blank">
-          <button
-            className="request_button"
-            onClick={() => setShowContactRequest(true)}
-          >
+          <button onClick={() => setShowContactRequest(true)}>
             Request Book
           </button>
         </Link>

@@ -8,18 +8,13 @@ import Main from "./components/Main";
 import FAQ from "./components/FAQ";
 import BookSingle from "./components/BookSingle";
 import SearchByAge from "./components/SearchByAge";
-import {
-  BrowserRouter,
-  Link,
-  Routes,
-  Route,
-  useParams,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 
 const RouteWrapper = (props) => {
   const params = useParams();
-  return <BookSingle params={params}{...props} />
-}
+  console.log(params);
+  return <BookSingle params={params} />;
+};
 
 function App() {
   return (
