@@ -4,18 +4,18 @@ pipeline {
     tools {nodejs "node"}
     
     stages {
-        stage('build') {
+        stage('Build') {
             steps {
                 echo 'building the app'
                 sh 'node App.js'
             }
         }
-        stage('test') {
+        stage('Test') {
             steps {
                 echo 'testing the app'
             }
         }
-        stage('deploy') {
+        stage('Deploy') {
             steps {
                 echo 'deploying the app'
             }
