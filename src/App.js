@@ -1,20 +1,17 @@
 import "./App.css";
+import Layout from "./components/Layout";
 import ClasslessSearch from "./components/ClasslessSearch";
 import FirebaseForm from "./components/FirebaseForm";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import About from "./components/About";
 import Main from "./components/Main";
+import Signup from "./components/Signup";
 import FAQ from "./components/FAQ";
 import BookSingle from "./components/BookSingle";
 import SearchByAge from "./components/SearchByAge";
-import {
-  BrowserRouter,
-  Link,
-  Routes,
-  Route,
-  useParams,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
+import Login from "./components/Login";
 
 const RouteWrapper = (props) => {
   const params = useParams();
@@ -24,19 +21,21 @@ const RouteWrapper = (props) => {
 function App() {
   return (
     <div>
-      <BrowserRouter>
-        <Header />
+      <Router>
         <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/FAQ" element={<FAQ />} />
-          <Route path="/addbook" element={<FirebaseForm />} />
-          <Route path="/search" element={<ClasslessSearch />} />
-          <Route path="/searchAge" element={<SearchByAge />} />
-          <Route path="/search/:id" element={<RouteWrapper />} />
+          <Route path="/" element={<Layout />} >
+            <Route index element={<Main />} />
+            <Route path="/searchbylanguage" element={<ClasslessSearch />} />
+            <Route path="/searchbyage" element={<SearchByAge />} />
+            <Route path="/addbook" element={<FirebaseForm />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/search/:id" element={<RouteWrapper />} />
+          </Route>
         </Routes>
         <Footer />
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }
