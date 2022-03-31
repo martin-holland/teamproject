@@ -1,34 +1,23 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import { db, authentication } from "./firebase-config";
+import Login from './Login';
 import {
   getAuth,
   signOut,
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
-// import Login from "./Login";
-// import useToken from "./useToken";
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import { collection, getDocs, doc, addDoc, setDoc } from "firebase/firestore";
 import PopUp from "./PopUp";
 import PopUpFields from "./PopUpFields";
-import Library from "./Library";
-// import {
-//   collection,
-//   getDocs,
-//   addDoc,
-//   updateDoc,
-//   doc,
-//   deleteDoc,
-// } from "firebase/firestore"; // Full list of firebase library if required
-
-// const firebase = getFirebase();
+import Library from './Library';
 
 const masterLanguages = require("./languages.json");
 const availability = require("./availability.json");
 const ageRanges = require("./ageRanges.json");
 
-function FirebaseForm(props) {
-  const [users, setUsers] = useState([]);
+function FirebaseForm() {
+  // const [books, setBooks] = useState([]);
   const [newOwner, setNewOwner] = useState("");
   const [newBookTitle, setNewBookTitle] = useState("");
   const [newAuthor, setNewAuthor] = useState("");
@@ -69,12 +58,12 @@ function FirebaseForm(props) {
       });
   };
 
-  const getUsers = async () => {
-    const languagesCollectionRef = collection(db, newBookLanguage);
-    const data = await getDocs(languagesCollectionRef);
-    console.log(data, users);
-    setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))); //use spread operator to return all fields from data
-  };
+  // const getUsers = async () => {
+  //   const languagesCollectionRef = collection(db, newBookLanguage);
+  //   const data = await getDocs(languagesCollectionRef);
+  //   console.log(data, books);
+  //   setBooks(data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))); //use spread operator to return all fields from data
+  // };
 
   const createUser = async () => {
     if (
@@ -85,8 +74,7 @@ function FirebaseForm(props) {
       newAgeRange !== "" &&
       newLocation !== ""
     ) {
-      const languagesCollectionRef = collection(db, newBookLanguage);
-      await addDoc(languagesCollectionRef, {
+      const book = {
         owner: newOwner,
         bookTitle: newBookTitle,
         author: newAuthor,
@@ -98,10 +86,12 @@ function FirebaseForm(props) {
         location: newLocation,
         comment: newComment,
         image: newImage,
-      });
+      };
+      const collectionRef = collection(db, 'languages', `${newBookLanguage}`, "books");
+      await addDoc(collectionRef, book);
       setShowPopUp(true);
 
-      getUsers();
+      // getUsers();
     } else {
       setShowPopUpFields(true);
     }
@@ -184,12 +174,13 @@ function FirebaseForm(props) {
       <p>Fields marked with * are required</p>
       <label htmlFor="booklang">Book Language*</label>
       <select
+        defaultValue=""
         placeholder="booklang"
         onChange={(event) => {
           setNewBookLanguage(event.target.value);
         }}
       >
-        <option key="default" value="" disabled selected>
+        <option key="default" value="" disabled>
           Select Language*
         </option>
         {masterLanguages.map((obj) => {
@@ -237,8 +228,6 @@ function FirebaseForm(props) {
       />
       <label htmlFor="ageRange">Age Range*</label>
       <select
-        required
-        placeholder="Age Range"
         onChange={(event) => {
           setNewAgeRange(event.target.value);
         }}
