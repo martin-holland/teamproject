@@ -15,8 +15,8 @@ import Login from "./components/Login";
 
 const RouteWrapper = (props) => {
   const params = useParams();
-  return <BookSingle params={params}{...props} />
-}
+  return <BookSingle params={params} {...props} />;
+};
 
 function App() {
   return (
