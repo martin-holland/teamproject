@@ -1,11 +1,17 @@
-import { useState, useEffect} from "react";
-import { db } from "./firebase-config";
-import Login from './Login';
-import useToken from './useToken';
+import { useState, useEffect } from "react";
+import { db, authentication } from "./firebase-config";
+import {
+  getAuth,
+  signOut,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
+// import Login from "./Login";
+// import useToken from "./useToken";
 import { collection, getDocs, addDoc } from "firebase/firestore";
 import PopUp from "./PopUp";
 import PopUpFields from "./PopUpFields";
-import Library from './Library';
+import Library from "./Library";
 // import {
 //   collection,
 //   getDocs,
@@ -36,6 +42,32 @@ function FirebaseForm(props) {
   const [newImage, setNewImage] = useState(null);
   const [showPopUp, setShowPopUp] = useState(false);
   const [showPopUpFields, setShowPopUpFields] = useState(false);
+  const [token, setToken] = useState("");
+  const [userDetails, setUserDetails] = useState(null);
+
+  const signOutWithGoogle = () => {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        setToken(null);
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
+
+  const signInWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(authentication, provider)
+      .then((res) => {
+        setToken(res.user.accessToken);
+        setUserDetails(res.user);
+        localStorage.setItem("token", JSON.stringify(res.user.accessToken));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const getUsers = async () => {
     const languagesCollectionRef = collection(db, newBookLanguage);
@@ -75,18 +107,34 @@ function FirebaseForm(props) {
     }
   };
 
-  useEffect( () => {
+  const getToken = () => {
+    const tokenString = localStorage.getItem("token");
+    setToken(tokenString);
+    // getAuth()
+    //   .verifyIdToken(tokenString)
+    //   .then((decodedToken) => {
+    //     console.log("Logged in successfully");
+    //   })
+    //   .catch((error) => {
+    //     localStorage.removeItem("token");
+    //     console.log(error);
+    //   });
+  };
+
+  useEffect(() => {
     console.log(showPopUp);
-  }, [showPopUp]);
+    getToken();
+    console.log(userDetails);
+  }, [showPopUp, userDetails]);
 
   const closeHandler = () => {
     setShowPopUp(false);
     window.location.reload();
-  }
+  };
 
   const closePopUpFields = () => {
     setShowPopUpFields(false);
-  }
+  };
 
   const onImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -114,14 +162,21 @@ function FirebaseForm(props) {
   // };
 
   const logoutHandler = () => {
+    signOutWithGoogle();
     localStorage.removeItem("token");
-    window.location.reload();
-  }
+  };
 
   // show Login page if not logged in (token in localeStorage)
-  const { token, setToken } = useToken();
+
   if (!token) {
-    return <Login setToken={setToken} />
+    return (
+      <div className="login-wrapper">
+        <h1>Please, log in to add books on the shelf or to request books</h1>
+        <div>
+          <button onClick={signInWithGoogle}>Sign in</button>
+        </div>
+      </div>
+    );
   }
   return (
     <div className="firebaseform">
@@ -247,10 +302,22 @@ function FirebaseForm(props) {
         onChange={onImageChange}
       />
       <button onClick={createUser}>Add Book</button>
-      {(showPopUp === true) && <PopUp close={ closeHandler } />}
-      {showPopUpFields && <PopUpFields close={ closePopUpFields } lang={newBookLanguage} aut={newAuthor} owner={newOwner} title={newBookTitle} age={newAgeRange} loc={newLocation}/>}
-       {newBookLanguage && <Library language= {newBookLanguage} />}
-        <button className="fake_logout" onClick={logoutHandler}>LOG OUT</button>
+      {showPopUp === true && <PopUp close={closeHandler} />}
+      {showPopUpFields && (
+        <PopUpFields
+          close={closePopUpFields}
+          lang={newBookLanguage}
+          aut={newAuthor}
+          owner={newOwner}
+          title={newBookTitle}
+          age={newAgeRange}
+          loc={newLocation}
+        />
+      )}
+      {newBookLanguage && <Library language={newBookLanguage} />}
+      <button className="fake_logout" onClick={logoutHandler}>
+        LOG OUT
+      </button>
     </div>
   );
 }
