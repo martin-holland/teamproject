@@ -1,47 +1,55 @@
 import React from "react";
-import "./ClasslessSearch.css";
+import "./SearchByLanguage.css";
 import { useState, useEffect } from "react";
 import { db } from "./firebase-config";
-import { collection, getDocs } from "firebase/firestore";
+import { getDocs, collectionGroup, query, where } from "firebase/firestore";
 import BookCard from "./BookCard";
-import PopUpLanguage from './PopUpLanguage';
+// import PopUpLanguage from './PopUpLanguage';
+ 
+ 
+
 
 const languages = require("./languages.json");
 const ageRanges = require("./ageRanges.json");
 
 function SearchByAge(props) {
-    const [foundBooks, updateFoundBooks] = useState([]);
+    const [foundBooks, setFoundBooks] = useState([]);
     const [ageRange, setAgeRange] = useState("");
-    const [language, updateLanguage] = useState("");
-    const [showPopUpLanguage, setShowPopUpLanguage] = useState(false);
-    const [showPopUpAge, setShowPopUpAge] = useState(false);
+    const [language, setLanguage] = useState("");
+    // const [showPopUpLanguage, setShowPopUpLanguage] = useState(false);
+    // const [showPopUpAge, setShowPopUpAge] = useState(false);
 
     const handleSubmit = e => {
         e.preventDefault();
         // console.log('Submit', bookName, language.toLowerCase());
-        if (language && ageRange)
+        if (ageRange)
         {
             getBooks();
-        } if (!language){
-            setShowPopUpLanguage(true);
-        }
+        } 
+        // if (!language){
+        //     setShowPopUpLanguage(true);
+        // }
     }
 
     const getBooks = async () => {
-        const data = await getDocs(collection(db, language));
-        console.log(data.docs.map(doc => doc.data()));
-        updateFoundBooks(data.docs.map(doc => ({ ...doc.data(), id: doc.id }))); // spreading into foundBooks (array, not array into array)
-        // console.log('foundBooks: ', foundBooks);
+        const books = query(collectionGroup(db, 'books'), where('ageRange', '==', ageRange));
+        const querySnapshot = await getDocs(books);
+
+        const matchingBooks = [];
+        querySnapshot.forEach(doc => {
+            matchingBooks.push(doc.data());
+        });
+        setFoundBooks(prev => matchingBooks);
         return foundBooks;
     };
 
     useEffect( () => {
-    console.log(showPopUpLanguage);
-    }, [showPopUpLanguage]);
+        console.log("hello");
+    }, [foundBooks, ageRange, language]);
     
-    const closePopupLanguage = () => {
-        setShowPopUpLanguage(false);
-    }
+    // const closePopupLanguage = () => {
+    //     setShowPopUpLanguage(false);
+    // }
 
     return (
         <div className="searchByLang">
@@ -68,9 +76,9 @@ function SearchByAge(props) {
 
             <select 
                 name="searchLanguage"
-                onChange={e => updateLanguage(e.target.value)}>
+                onChange={e => setLanguage(e.target.value)}>
                     <option key="default" value="" disabled selected>
-                        Select Language*
+                        Language (optional)
                     </option>
                     {languages.map((langObj) => <option key={langObj.name} value={langObj.name}>{langObj.name}</option>)
                     }
@@ -80,9 +88,7 @@ function SearchByAge(props) {
         </form>
 
         <div className="search_results">
-            {foundBooks.filter((book) => {
-                return (book.ageRange === ageRange)})
-                .map((book) => (
+            {foundBooks.map(book => (
                     <BookCard
                     image={book.image}
                     id={book.id}
@@ -95,7 +101,7 @@ function SearchByAge(props) {
                     author={book.author}
                 />
             ))}
-        {showPopUpLanguage && <PopUpLanguage close={ closePopupLanguage } />}
+        {/* {showPopUpLanguage && <PopUpLanguage close={ closePopupLanguage } />} */}
         </div>
         </div>
     );

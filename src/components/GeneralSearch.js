@@ -1,68 +1,50 @@
 import React from "react";
-import "./ClasslessSearch.css";
+import "./SearchByLanguage.css";
 import { getLangs } from "./functionsLibrary";
 import { useState, useEffect } from "react";
 import { db } from "./firebase-config";
-import { collection, getDocs } from "firebase/firestore";
+import { getDocs, collectionGroup, query } from "firebase/firestore";
 import BookCard from "./BookCard";
-import PopUpLanguage from './PopUpLanguage';
 
-// name and native name for languages:
-const languages = getLangs();
 
-function ClasslessSearch() {
-    const [foundBooks, updateFoundBooks] = useState([]);
+function GeneralSearch() {
+    const [foundBooks, setFoundBooks] = useState([]);
     const [bookName, setBookName] = useState("");
-    const [language, updateLanguage] = useState("");
-    const [showPopUpLanguage, setShowPopUpLanguage] = useState(false);
+ 
 
     const handleSubmit = e => {
         e.preventDefault();
         // console.log('Submit', bookName, language.toLowerCase());
-        if (language !== "") {
-            getBooks();
-        } else {
-            setShowPopUpLanguage(true);
-        }
+        getBooks();
+
     }
 
     const getBooks = async () => {
-        const data = await getDocs(collection(db, language));
-        console.log(data.docs.map(doc => doc.data()));
-        updateFoundBooks(data.docs.map(doc => ({ ...doc.data(), id: doc.id }))); // spreading into foundBooks (array, not array into array)
-        // console.log('foundBooks: ', foundBooks);
+        const books = query(collectionGroup(db, 'books'));
+        const querySnapshot = await getDocs(books);
+
+        const matchingBooks = [];
+        querySnapshot.forEach(doc => {
+            matchingBooks.push(doc.data());
+        });
+        setFoundBooks(prev => matchingBooks);
         return foundBooks;
     };
 
     useEffect( () => {
-    console.log(showPopUpLanguage);
-    }, [showPopUpLanguage]);
+    console.log("general search");
+    }, []);
     
-    const closePopupLanguage = () => {
-        setShowPopUpLanguage(false);
-    }
 
     return (
         <div className="searchByLang">
-        <h3>Search for a book title and select the book language:</h3>
         <form onSubmit={handleSubmit}>
             <input type="text"
                 name="searchInput"
                 placeholder="Book title"
                 onChange={e => setBookName(e.target.value)}
             />
-
-            <select 
-                name="searchLanguage"
-                onChange={e => updateLanguage(e.target.value)}>
-                    <option key="default" value="" disabled selected>
-                        Select Language*
-                    </option>
-                    {languages.map((langObj) => <option key={langObj.name} value={langObj.name}>{langObj.name}</option>)
-                    }
-            </select>
-
-            <input type="submit" value="Submit" />
+        <input type="submit" value="Search" />
         </form>
 
         <div className="search_results">
@@ -81,10 +63,9 @@ function ClasslessSearch() {
                     author={book.author}
                 />
             ))}
-        {showPopUpLanguage && <PopUpLanguage close={ closePopupLanguage } />}
         </div>
         </div>
     );
 }
 
-export default ClasslessSearch;
+export default GeneralSearch;

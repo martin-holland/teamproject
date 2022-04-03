@@ -1,17 +1,18 @@
 import "./App.css";
 import Layout from "./components/Layout";
-import ClasslessSearch from "./components/ClasslessSearch";
+import SearchByLanguage from "./components/SearchByLanguage";
 import FirebaseForm from "./components/FirebaseForm";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import About from "./components/About";
 import Main from "./components/Main";
-import Signup from "./components/Signup";
+// import Signout from "./components/Signout";
 import FAQ from "./components/FAQ";
 import BookSingle from "./components/BookSingle";
 import SearchByAge from "./components/SearchByAge";
 import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
-import Login from "./components/Login";
+// import Signin from "./components/Signin";
+import { useState } from "react";
 
 const RouteWrapper = (props) => {
   const params = useParams();
@@ -19,18 +20,21 @@ const RouteWrapper = (props) => {
 };
 
 function App() {
+  const [token, setToken] = useState("");
+  const [user, setUser] = useState("");
+
   return (
     <div>
       <Router>
         <Routes>
-          <Route path="/" element={<Layout />} >
+          <Route path="/" element={<Layout  token={token} setToken={setToken} user={user} setUser={setUser}/>} >
             <Route index element={<Main />} />
-            <Route path="/searchbylanguage" element={<ClasslessSearch />} />
+            <Route path="/searchbylanguage" element={<SearchByLanguage />} />
             <Route path="/searchbyage" element={<SearchByAge />} />
-            <Route path="/addbook" element={<FirebaseForm />} />
+            <Route path="/addbook" element={<FirebaseForm token={token} user={user} setUser={setUser}/>} />
             <Route path="/about" element={<About />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
+            {/* <Route path="/signin" element={<Signin token={token} setToken={setToken}/>} />
+            <Route path="/signout" element={<Signout token={token} setToken={setToken}/>} /> */}
             <Route path="/search/:id" element={<RouteWrapper />} />
           </Route>
         </Routes>
