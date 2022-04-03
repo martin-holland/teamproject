@@ -1,5 +1,6 @@
 .main_background {
-    background-image: url("/src/components/assets/library.avif");
+    background: url("/src/components/assets/library.avif") no-repeat fixed center center/cover;
     width: 100vw;
     height: 70vh;
+    
 }

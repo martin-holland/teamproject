@@ -32,7 +32,7 @@ function GeneralSearch() {
     return (
         <div className="searchByLang">
         <form onSubmit={handleSubmit}>
-            <input type="text"
+            <input type="text" className="bookTitle"
                 name="searchInput"
                 placeholder="Book title"
                 onChange={e => setBookName(e.target.value)}
