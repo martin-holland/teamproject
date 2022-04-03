@@ -22,7 +22,7 @@ const BookCard = ({
         // user pic, isbn pic, placeholder pic
         if (image === null) {
             // do not change to !==
-            if (isbn != 0) {
+            if (isbn !== 0) {
                 return `https://covers.openlibrary.org/b/isbn/${isbn}-S.jpg`
             } else {
                 return require('./assets/empty_cover.jpg').default

@@ -3,15 +3,12 @@ import Layout from "./components/Layout";
 import SearchByLanguage from "./components/SearchByLanguage";
 import FirebaseForm from "./components/FirebaseForm";
 import Footer from "./components/Footer";
-import Header from "./components/Header";
 import About from "./components/About";
 import Main from "./components/Main";
-// import Signout from "./components/Signout";
-import FAQ from "./components/FAQ";
+// import FAQ from "./components/FAQ";
 import BookSingle from "./components/BookSingle";
 import SearchByAge from "./components/SearchByAge";
 import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
-// import Signin from "./components/Signin";
 import { useState } from "react";
 
 const RouteWrapper = (props) => {

@@ -1,7 +1,6 @@
 import React from "react";
 import "./SearchByLanguage.css";
-import { getLangs } from "./functionsLibrary";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { db } from "./firebase-config";
 import { getDocs, collectionGroup, query } from "firebase/firestore";
 import BookCard from "./BookCard";
@@ -14,7 +13,6 @@ function GeneralSearch() {
 
     const handleSubmit = e => {
         e.preventDefault();
-        // console.log('Submit', bookName, language.toLowerCase());
         getBooks();
 
     }
@@ -30,11 +28,6 @@ function GeneralSearch() {
         setFoundBooks(prev => matchingBooks);
         return foundBooks;
     };
-
-    useEffect( () => {
-    console.log("general search");
-    }, []);
-    
 
     return (
         <div className="searchByLang">

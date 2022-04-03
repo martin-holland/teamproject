@@ -8,13 +8,14 @@ ul {
   align-items: center;
   list-style-type: none;
   overflow: hidden;
-  background-color: #333;
+  /* background-color: #d8b18e; */
+  background-color: #efb167;
 }
 
 
 li a {
   display: block;
-  color: rgb(250, 240, 230);
+  color: rgb(9, 25, 25);
   text-align: center;
 }
 
