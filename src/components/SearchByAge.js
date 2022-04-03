@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { db } from "./firebase-config";
 import { getDocs, collectionGroup, query, where } from "firebase/firestore";
 import BookCard from "./BookCard";
+import './Main.css';
 // import PopUpLanguage from './PopUpLanguage';
  
  
@@ -52,8 +53,9 @@ function SearchByAge(props) {
     // }
 
     return (
+        <main className="main_background">
         <div className="searchByLang">
-        <h3>Search for books by language and age range:</h3>
+        {/* <h3>Search for books by language and age range:</h3> */}
         <form onSubmit={handleSubmit}>
         <select
             required
@@ -104,6 +106,7 @@ function SearchByAge(props) {
         {/* {showPopUpLanguage && <PopUpLanguage close={ closePopupLanguage } />} */}
         </div>
         </div>
+        </main>
     );
 }
 

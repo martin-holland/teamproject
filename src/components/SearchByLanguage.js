@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { db } from "./firebase-config";
 import { getDocs, collectionGroup, query, where } from "firebase/firestore";
 import BookCard from "./BookCard";
+import './Main.css';
 
 // name and native name for languages:
 const languages = getLangs();
@@ -44,8 +45,9 @@ function SearchByLanguage() {
     
 
     return (
+        <main className="main_background">
         <div className="searchByLang">
-        <h3>Select a language. Book title can be empty:</h3>
+        {/* <h3>Select a language. Book title can be empty:</h3> */}
         <form onSubmit={handleSubmit}>
             <input type="text"
                 name="searchInput"
@@ -86,6 +88,7 @@ function SearchByLanguage() {
             ))}
         </div>
         </div>
+        </main>
     );
 }
 

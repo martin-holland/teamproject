@@ -1,7 +1,7 @@
 nav {
   width: 100vw;
 }
-  
+
 ul {
   display: flex;
   justify-content: space-evenly;
@@ -12,18 +12,13 @@ ul {
   background-color: #efb167;
 }
 
-
 li a {
   display: block;
-  color: rgb(9, 25, 25);
+  color: #6f4e37;
   text-align: center;
 }
 
 li a:hover {
-  color: #333;
+  cursor: pointer;
+  font-size: 1.1rem;
 }
-
-li:hover {
-  background-color: rgb(250, 240, 230);
-}
-  

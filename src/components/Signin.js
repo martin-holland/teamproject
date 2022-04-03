@@ -48,7 +48,7 @@ const Signin = ({ token, setToken}) => {
 
   return (
       <button onClick={signInWithGoogle}>
-        Sign in with Google
+        Sign In
       </button>
   );
 };

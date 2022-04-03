@@ -8,6 +8,7 @@
   margin: 1rem;
   padding: 0.6rem;
   border-radius: 4px;
+  background-color: #fefefa;
 }
 
 .searchByLang select {
@@ -15,18 +16,22 @@
 }
 
 h3 {
-  color: #4d2c06;
+  color: #fefefa;
   font-family: "Open Sans", sans-serif;
 }
 
 input,
 select {
-  background-color: #fff5ee;
-  color: #4d2c06;
+  background-color: #fefefa;
+  color: #6f4e37;
 }
 
 /***  Book results area ****/
 .search_results {
   display: flex;
   flex-wrap: wrap;
+}
+
+.bookTitle {
+  width: 225px;
 }
