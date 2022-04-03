@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import { db } from "./firebase-config";
 import { getDocs, collectionGroup, query, where } from "firebase/firestore";
 import BookCard from "./BookCard";
-import PopUpLanguage from './PopUpLanguage';
 
 // name and native name for languages:
 const languages = getLangs();
@@ -56,9 +55,10 @@ function SearchByLanguage() {
 
             <select
                 required
+                selected="Select Language*"
                 name="searchLanguage"
                 onChange={e => setLanguage(e.target.value)}>
-                    <option key="default" value="" disabled selected>
+                    <option key="default" value="" disabled>
                         Select Language*
                     </option>
                     {languages.map((langObj) => <option key={langObj.name} value={langObj.name}>{langObj.name}</option>)

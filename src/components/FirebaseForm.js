@@ -1,17 +1,8 @@
 import { useState, useEffect} from "react";
-import { Link } from 'react-router-dom';
-import { db, authentication } from "./firebase-config";
-// import Login from './Login';
-// import {
-//   getAuth,
-//   signOut,
-//   GoogleAuthProvider,
-//   signInWithPopup,
-// } from "firebase/auth";
-import { collection, getDocs, doc, addDoc, setDoc } from "firebase/firestore";
+import { db,  } from "./firebase-config";
+import { collection, addDoc } from "firebase/firestore";
 import PopUp from "./PopUp";
 import PopUpFields from "./PopUpFields";
-import Library from './Library';
 
 const masterLanguages = require("./languages.json");
 const availability = require("./availability.json");
@@ -31,39 +22,7 @@ function FirebaseForm({ token, user, SetUser, owner , setOwner }) {
   const [newImage, setNewImage] = useState(null);
   const [showPopUp, setShowPopUp] = useState(false);
   const [showPopUpFields, setShowPopUpFields] = useState(false);
-  // const [token, setToken] = useState("");
-  // const [userDetails, setUserDetails] = useState(null);
 
-  // const signOutWithGoogle = () => {
-  //   const auth = getAuth();
-  //   signOut(auth)
-  //     .then(() => {
-  //       setToken(null);
-  //     })
-  //     .catch((error) => {
-  //       // An error happened.
-  //     });
-  // };
-
-  // const signInWithGoogle = () => {
-  //   const provider = new GoogleAuthProvider();
-  //   signInWithPopup(authentication, provider)
-  //     .then((res) => {
-  //       setToken(res.user.accessToken);
-  //       setUserDetails(res.user);
-  //       localStorage.setItem("VStoken", JSON.stringify(res.user.accessToken));
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
-  // const getUsers = async () => {
-  //   const languagesCollectionRef = collection(db, newBookLanguage);
-  //   const data = await getDocs(languagesCollectionRef);
-  //   console.log(data, books);
-  //   setBooks(data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))); //use spread operator to return all fields from data
-  // };
 
   const createBook = async () => {
     if (
@@ -97,20 +56,6 @@ function FirebaseForm({ token, user, SetUser, owner , setOwner }) {
     }
   };
 
-  // const getToken = () => {
-  //   const tokenString = localStorage.getItem("VStoken");
-  //   setToken(tokenString);
-  //   // getAuth()
-  //   //   .verifyIdToken(tokenString)
-  //   //   .then((decodedToken) => {
-  //   //     console.log("Logged in successfully");
-  //   //   })
-  //   //   .catch((error) => {
-  //   //     localStorage.removeItem("VStoken");
-  //   //     console.log(error);
-  //   //   });
-  // };
-
   useEffect(() => {
     // getToken();
     // console.log("userDetails:", userDetails);
@@ -133,31 +78,6 @@ function FirebaseForm({ token, user, SetUser, owner , setOwner }) {
       setNewImage(URL.createObjectURL(e.target.files[0]));
     }
   };
-
-  // const handleUpload = async (event) => {
-  //   if (!firebase) return;
-
-  //   const uploadedFile = event?.target.files[0];
-  //   if (!uploadedFile) return;
-
-  //   const storage = firebase.storage();
-  //   const storageRef = storage.ref("images");
-
-  //   try {
-  //     await storageRef.child(uploadedFile.name).put(uploadedFile);
-  //     alert("Successfully uploaded picture!");
-  //   } catch (error) {
-  //     console.log("error", error);
-  //   }
-  // };
-
-  // const logoutHandler = () => {
-  //   signOutWithGoogle();
-  //   localStorage.removeItem("VStoken");
-  // };
-
-  // show Login page if not logged in (token in localeStorage)
-
 
   return (
     <>
@@ -295,10 +215,6 @@ function FirebaseForm({ token, user, SetUser, owner , setOwner }) {
           loc={newLocation}
         />
       )}
-      {/* {newBookLanguage && <Library language={newBookLanguage} />} */}
-      {/* <button className="fake_logout" onClick={logoutHandler}>
-        LOG OUT
-      </button> */}
     </div>)}
     {!token && (
       <h2>Sign in to add a book</h2>
