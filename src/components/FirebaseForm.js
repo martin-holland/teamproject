@@ -8,7 +8,7 @@ const masterLanguages = require("./languages.json");
 const availability = require("./availability.json");
 const ageRanges = require("./ageRanges.json");
 
-function FirebaseForm({ token, user, SetUser, owner , setOwner }) {
+function FirebaseForm({ token, user, SetUser }) {
   // const [books, setBooks] = useState([]);
   const [newBookTitle, setNewBookTitle] = useState("");
   const [newAuthor, setNewAuthor] = useState("");
@@ -27,14 +27,13 @@ function FirebaseForm({ token, user, SetUser, owner , setOwner }) {
   const createBook = async () => {
     if (
       newBookLanguage !== "" &&
-      owner !== "" &&
       newBookTitle !== "" &&
       newAuthor !== "" &&
       newAgeRange !== "" &&
       newLocation !== ""
     ) {
       const book = {
-        owner: owner,
+        owner: user,
         bookTitle: newBookTitle,
         author: newAuthor,
         bookLanguage: newBookLanguage,
@@ -103,15 +102,15 @@ function FirebaseForm({ token, user, SetUser, owner , setOwner }) {
           );
         })}
       </select>
-      <label htmlFor="owner">(Owner)*</label>
+      {/* <label htmlFor="owner">(Owner)*</label>
       <input
         required
         type="text"
         placeholder="Owner"
         onChange={(event) => {
-          setOwner(event.target.value);
+          SetUser(event.target.value);
         }}
-      />
+      /> */}
       <label htmlFor="booktitle">Book Title*</label>
       <input
         required
@@ -140,6 +139,7 @@ function FirebaseForm({ token, user, SetUser, owner , setOwner }) {
       />
       <label htmlFor="ageRange">Age Range*</label>
       <select
+        defaultValue="Adult"
         onChange={(event) => {
           setNewAgeRange(event.target.value);
         }}
@@ -154,11 +154,12 @@ function FirebaseForm({ token, user, SetUser, owner , setOwner }) {
       </select>
       <label htmlFor="available">Availability</label>
       <select
+        defaultValue=""
         onChange={(event) => {
           setNewAvailable(event.target.value);
         }}
       >
-        <option key="default" value="" disabled selected>
+        <option key="default" value="" disabled >
           Availability
         </option>
         {availability.map((obj) => {
@@ -209,7 +210,7 @@ function FirebaseForm({ token, user, SetUser, owner , setOwner }) {
           close={closePopUpFields}
           lang={newBookLanguage}
           aut={newAuthor}
-          owner={owner}
+          owner={user}
           title={newBookTitle}
           age={newAgeRange}
           loc={newLocation}

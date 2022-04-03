@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const About = () => {
   return (
     <div>
-    <div class="container1">
+    <div className="container1">
       <h2>About The Virtual Shelf</h2>
       <p>
         The Virtual Shelf is a place where you can find books for yourself and
