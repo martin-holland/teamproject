@@ -22,14 +22,10 @@ function SearchByAge(props) {
 
     const handleSubmit = e => {
         e.preventDefault();
-        // console.log('Submit', bookName, language.toLowerCase());
-        if (ageRange)
-        {
+        if (ageRange){
             getBooks();
         } 
-        // if (!language){
-        //     setShowPopUpLanguage(true);
-        // }
+
     }
 
     const getBooks = async () => {
@@ -45,12 +41,8 @@ function SearchByAge(props) {
     };
 
     useEffect( () => {
-        console.log("hello");
     }, [foundBooks, ageRange, language]);
     
-    // const closePopupLanguage = () => {
-    //     setShowPopUpLanguage(false);
-    // }
 
     return (
         <main className="main_background">
@@ -59,12 +51,13 @@ function SearchByAge(props) {
         <form onSubmit={handleSubmit}>
         <select
             required
-            placeholder="Age Range"
+            defaultValue=""
+            name="searchAge"
             onChange={(event) => {
             setAgeRange(event.target.value);
             }}
         >
-            <option key="default" value="" disabled selected>
+            <option key="default" value="" disabled hidden>
                 Age*
             </option>
             {ageRanges.map((obj) => {
@@ -77,9 +70,10 @@ function SearchByAge(props) {
         </select>
 
             <select 
+            defaultValue=""
                 name="searchLanguage"
                 onChange={e => setLanguage(e.target.value)}>
-                    <option key="default" value="" disabled selected>
+                    <option key="default" value="" disabled hidden>
                         Language (optional)
                     </option>
                     {languages.map((langObj) => <option key={langObj.name} value={langObj.name}>{langObj.name}</option>)

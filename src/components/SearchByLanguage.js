@@ -17,7 +17,6 @@ function SearchByLanguage() {
 
     const handleSubmit = e => {
         e.preventDefault();
-        // console.log('Submit', bookName, language.toLowerCase());
         if (language !== "") {
             getBooks();
         }
@@ -40,7 +39,6 @@ function SearchByLanguage() {
     };
 
     useEffect( () => {
-    console.log("hello");
     }, [foundBooks, language]);
     
 
@@ -57,10 +55,10 @@ function SearchByLanguage() {
 
             <select
                 required
-                selected="Select Language*"
+                defaultValue=""
                 name="searchLanguage"
                 onChange={e => setLanguage(e.target.value)}>
-                    <option key="default" value="" disabled>
+                    <option key="default" value=""  disabled hidden>
                         Select Language*
                     </option>
                     {languages.map((langObj) => <option key={langObj.name} value={langObj.name}>{langObj.name}</option>)
@@ -71,7 +69,7 @@ function SearchByLanguage() {
         </form>
 
         <div className="search_results">
-        {foundBooks.filter((book) => {
+        {foundBooks.filter((book, i) => {
                 return book.bookTitle.toLowerCase().includes(bookName.toLowerCase())})
                 .map((book) => (
                     <BookCard
