@@ -1,12 +1,13 @@
 import { useState, useEffect} from "react";
+import { Link } from 'react-router-dom';
 import { db, authentication } from "./firebase-config";
-import Login from './Login';
-import {
-  getAuth,
-  signOut,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
+// import Login from './Login';
+// import {
+//   getAuth,
+//   signOut,
+//   GoogleAuthProvider,
+//   signInWithPopup,
+// } from "firebase/auth";
 import { collection, getDocs, doc, addDoc, setDoc } from "firebase/firestore";
 import PopUp from "./PopUp";
 import PopUpFields from "./PopUpFields";
@@ -16,9 +17,8 @@ const masterLanguages = require("./languages.json");
 const availability = require("./availability.json");
 const ageRanges = require("./ageRanges.json");
 
-function FirebaseForm() {
+function FirebaseForm({ token, user, SetUser, owner , setOwner }) {
   // const [books, setBooks] = useState([]);
-  const [newOwner, setNewOwner] = useState("");
   const [newBookTitle, setNewBookTitle] = useState("");
   const [newAuthor, setNewAuthor] = useState("");
   const [newBookLanguage, setNewBookLanguage] = useState("");
@@ -31,32 +31,32 @@ function FirebaseForm() {
   const [newImage, setNewImage] = useState(null);
   const [showPopUp, setShowPopUp] = useState(false);
   const [showPopUpFields, setShowPopUpFields] = useState(false);
-  const [token, setToken] = useState("");
-  const [userDetails, setUserDetails] = useState(null);
+  // const [token, setToken] = useState("");
+  // const [userDetails, setUserDetails] = useState(null);
 
-  const signOutWithGoogle = () => {
-    const auth = getAuth();
-    signOut(auth)
-      .then(() => {
-        setToken(null);
-      })
-      .catch((error) => {
-        // An error happened.
-      });
-  };
+  // const signOutWithGoogle = () => {
+  //   const auth = getAuth();
+  //   signOut(auth)
+  //     .then(() => {
+  //       setToken(null);
+  //     })
+  //     .catch((error) => {
+  //       // An error happened.
+  //     });
+  // };
 
-  const signInWithGoogle = () => {
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(authentication, provider)
-      .then((res) => {
-        setToken(res.user.accessToken);
-        setUserDetails(res.user);
-        localStorage.setItem("token", JSON.stringify(res.user.accessToken));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const signInWithGoogle = () => {
+  //   const provider = new GoogleAuthProvider();
+  //   signInWithPopup(authentication, provider)
+  //     .then((res) => {
+  //       setToken(res.user.accessToken);
+  //       setUserDetails(res.user);
+  //       localStorage.setItem("VStoken", JSON.stringify(res.user.accessToken));
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   // const getUsers = async () => {
   //   const languagesCollectionRef = collection(db, newBookLanguage);
@@ -65,17 +65,17 @@ function FirebaseForm() {
   //   setBooks(data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))); //use spread operator to return all fields from data
   // };
 
-  const createUser = async () => {
+  const createBook = async () => {
     if (
       newBookLanguage !== "" &&
-      newOwner !== "" &&
+      owner !== "" &&
       newBookTitle !== "" &&
       newAuthor !== "" &&
       newAgeRange !== "" &&
       newLocation !== ""
     ) {
       const book = {
-        owner: newOwner,
+        owner: owner,
         bookTitle: newBookTitle,
         author: newAuthor,
         bookLanguage: newBookLanguage,
@@ -97,25 +97,25 @@ function FirebaseForm() {
     }
   };
 
-  const getToken = () => {
-    const tokenString = localStorage.getItem("token");
-    setToken(tokenString);
-    // getAuth()
-    //   .verifyIdToken(tokenString)
-    //   .then((decodedToken) => {
-    //     console.log("Logged in successfully");
-    //   })
-    //   .catch((error) => {
-    //     localStorage.removeItem("token");
-    //     console.log(error);
-    //   });
-  };
+  // const getToken = () => {
+  //   const tokenString = localStorage.getItem("VStoken");
+  //   setToken(tokenString);
+  //   // getAuth()
+  //   //   .verifyIdToken(tokenString)
+  //   //   .then((decodedToken) => {
+  //   //     console.log("Logged in successfully");
+  //   //   })
+  //   //   .catch((error) => {
+  //   //     localStorage.removeItem("VStoken");
+  //   //     console.log(error);
+  //   //   });
+  // };
 
   useEffect(() => {
-    console.log(showPopUp);
-    getToken();
-    console.log(userDetails);
-  }, [showPopUp, userDetails]);
+    // getToken();
+    // console.log("userDetails:", userDetails);
+  // }, [showPopUp, userDetails]);
+    }, []);
 
   const closeHandler = () => {
     setShowPopUp(false);
@@ -151,25 +151,17 @@ function FirebaseForm() {
   //   }
   // };
 
-  const logoutHandler = () => {
-    signOutWithGoogle();
-    localStorage.removeItem("token");
-  };
+  // const logoutHandler = () => {
+  //   signOutWithGoogle();
+  //   localStorage.removeItem("VStoken");
+  // };
 
   // show Login page if not logged in (token in localeStorage)
 
-  if (!token) {
-    return (
-      <div className="login-wrapper">
-        <h1>Please, log in to add books on the shelf or to request books</h1>
-        <div>
-          <button onClick={signInWithGoogle}>Sign in</button>
-        </div>
-      </div>
-    );
-  }
+
   return (
-    <div className="firebaseform">
+    <>
+    {token && (<div className="firebaseform">
       <h2>Add your book to the virtual shelf!</h2>
       <p>Fields marked with * are required</p>
       <label htmlFor="booklang">Book Language*</label>
@@ -197,7 +189,7 @@ function FirebaseForm() {
         type="text"
         placeholder="Owner"
         onChange={(event) => {
-          setNewOwner(event.target.value);
+          setOwner(event.target.value);
         }}
       />
       <label htmlFor="booktitle">Book Title*</label>
@@ -290,24 +282,28 @@ function FirebaseForm() {
         accept="image/png, image/jpeg, image/jpg"
         onChange={onImageChange}
       />
-      <button onClick={createUser}>Add Book</button>
+      <button onClick={createBook}>Add Book</button>
       {showPopUp === true && <PopUp close={closeHandler} />}
       {showPopUpFields && (
         <PopUpFields
           close={closePopUpFields}
           lang={newBookLanguage}
           aut={newAuthor}
-          owner={newOwner}
+          owner={owner}
           title={newBookTitle}
           age={newAgeRange}
           loc={newLocation}
         />
       )}
-      {newBookLanguage && <Library language={newBookLanguage} />}
-      <button className="fake_logout" onClick={logoutHandler}>
+      {/* {newBookLanguage && <Library language={newBookLanguage} />} */}
+      {/* <button className="fake_logout" onClick={logoutHandler}>
         LOG OUT
-      </button>
-    </div>
+      </button> */}
+    </div>)}
+    {!token && (
+      <h2>Sign in to add a book</h2>
+    )}
+    </>
   );
 }
 

@@ -1,4 +1,5 @@
 .card {
+  background-color: aliceblue;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,7 +15,7 @@
   border: 1px solid black;
   border-radius: 3px;
   box-shadow: 0 0 5px grey;
-  opacity: 90%;
+  /* opacity: 90%; */
 }
 
 .card h2 {
@@ -72,7 +73,7 @@ the whole card is a link */
 
 #false {
   color: grey;
-  opacity: 30%;
+  /* opacity: 90%; */
   min-width: 12rem;
   min-height: 20rem;
   width: 13rem;

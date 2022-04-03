@@ -1,50 +1,52 @@
 import React from "react";
-import "./ClasslessSearch.css";
+import "./SearchByLanguage.css";
 import { getLangs } from "./functionsLibrary";
 import { useState, useEffect } from "react";
 import { db } from "./firebase-config";
-import { collection, getDocs } from "firebase/firestore";
+import { getDocs, collectionGroup, query, where } from "firebase/firestore";
 import BookCard from "./BookCard";
 import PopUpLanguage from './PopUpLanguage';
 
 // name and native name for languages:
 const languages = getLangs();
 
-function ClasslessSearch() {
-    const [foundBooks, updateFoundBooks] = useState([]);
+function SearchByLanguage() {
+    const [foundBooks, setFoundBooks] = useState([]);
     const [bookName, setBookName] = useState("");
-    const [language, updateLanguage] = useState("");
-    const [showPopUpLanguage, setShowPopUpLanguage] = useState(false);
+    const [language, setLanguage] = useState("");
 
     const handleSubmit = e => {
         e.preventDefault();
         // console.log('Submit', bookName, language.toLowerCase());
         if (language !== "") {
             getBooks();
-        } else {
-            setShowPopUpLanguage(true);
         }
     }
 
     const getBooks = async () => {
-        const data = await getDocs(collection(db, language));
-        console.log(data.docs.map(doc => doc.data()));
-        updateFoundBooks(data.docs.map(doc => ({ ...doc.data(), id: doc.id }))); // spreading into foundBooks (array, not array into array)
-        // console.log('foundBooks: ', foundBooks);
+        // this is a startsWith search but search in Firebase is CASE SENTITIVE so ATM we fetch all language and filter in render. Not efficient with large data:
+        // const end = bookName.replace(/.$/, c => String.fromCharCode(c.charCodeAt(0) + 1));
+        // const books = query(collectionGroup(db, 'books'), where('bookLanguage', '==', language), where('bookTitle', '>=', bookName), where('bookTitle', '<', end));  
+
+        const books = query(collectionGroup(db, 'books'), where('bookLanguage', '==', language)); 
+        const querySnapshot = await getDocs(books);
+
+        const matchingBooks = [];
+        querySnapshot.forEach(doc => {
+            matchingBooks.push(doc.data());
+        });
+        setFoundBooks(prev => matchingBooks);
         return foundBooks;
     };
 
     useEffect( () => {
-    console.log(showPopUpLanguage);
-    }, [showPopUpLanguage]);
+    console.log("hello");
+    }, [foundBooks, language]);
     
-    const closePopupLanguage = () => {
-        setShowPopUpLanguage(false);
-    }
 
     return (
         <div className="searchByLang">
-        <h3>Search for a book title and select the book language:</h3>
+        <h3>Select a language. Book title can be empty:</h3>
         <form onSubmit={handleSubmit}>
             <input type="text"
                 name="searchInput"
@@ -52,9 +54,10 @@ function ClasslessSearch() {
                 onChange={e => setBookName(e.target.value)}
             />
 
-            <select 
+            <select
+                required
                 name="searchLanguage"
-                onChange={e => updateLanguage(e.target.value)}>
+                onChange={e => setLanguage(e.target.value)}>
                     <option key="default" value="" disabled selected>
                         Select Language*
                     </option>
@@ -66,7 +69,7 @@ function ClasslessSearch() {
         </form>
 
         <div className="search_results">
-            {foundBooks.filter((book) => {
+        {foundBooks.filter((book) => {
                 return book.bookTitle.toLowerCase().includes(bookName.toLowerCase())})
                 .map((book) => (
                     <BookCard
@@ -81,10 +84,9 @@ function ClasslessSearch() {
                     author={book.author}
                 />
             ))}
-        {showPopUpLanguage && <PopUpLanguage close={ closePopupLanguage } />}
         </div>
         </div>
     );
 }
 
-export default ClasslessSearch;
+export default SearchByLanguage;

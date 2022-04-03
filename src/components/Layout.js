@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom";
 import Nav from './Nav';
 
-function Layout() {
+function Layout( { token, setToken, user, setUser }) {
     return (
     <>       
-        <Nav/> 
+        <Nav token={token} setToken={setToken} user={user} setUser={setUser}/>
         <main>
             <Outlet />
         </main>
