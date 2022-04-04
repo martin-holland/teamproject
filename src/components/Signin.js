@@ -9,15 +9,15 @@ import "./Login.css";
 // import FailedLogin from './FailedLogin';
 
 
-const Signin = ({ token, setToken}) => {
-  const [userDetails, setUserDetails] = useState(null);
+const Signin = ({ token, setToken, user, setUser }) => {
+  // const [userDetails, setUserDetails] = useState(null);
 
   const signInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(authentication, provider)
       .then((res) => {
         setToken(res.user.accessToken);
-        setUserDetails(res.user);
+        setUser(res.user);
         localStorage.setItem("VStoken", JSON.stringify(res.user.accessToken));
       })
       .catch((err) => {
@@ -44,7 +44,7 @@ const Signin = ({ token, setToken}) => {
   useEffect(() => {
     getToken();
     // console.log("userDetails:", userDetails);
-  }, [userDetails]);
+  }, [user]);
 
 
   return (

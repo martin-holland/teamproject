@@ -24,7 +24,7 @@ import UserDashboard from './components/UserDashboard';
 
 function App() {
   const [token, setToken] = useState("");
-  const [user, setUser] = useState("");
+  const [userDetails, setUserDetails] = useState(null);
 
   return (
     <div>
@@ -45,12 +45,12 @@ function App() {
         <Footer />
       </Router> */}
 
-      <Nav token={token} setToken={setToken}/>
+      <Nav token={token} setToken={setToken} user={userDetails} setUser={setUserDetails}/>
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="search%20by%20lang" element={<SearchByLanguage />} />
         <Route path="search%20by%20age" element={<SearchByAge />} />
-        <Route path="add%20a%20book" element={<FirebaseForm token={token} user={user} setUser={setUser}/>} />
+        <Route path="add%20a%20book" element={<FirebaseForm token={token} user={userDetails} setUser={setUserDetails}/>} />
         <Route path="about" element={<About />} />  
         <Route path="signin" element={<UserDashboard />} />  
       </Routes>
