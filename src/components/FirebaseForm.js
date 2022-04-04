@@ -1,29 +1,31 @@
 import { useState, useEffect} from "react";
-import { db } from "./firebase-config";
-import Login from './Login';
-import useToken from './useToken';
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import { db,  } from "./firebase-config";
+import { collection, addDoc } from "firebase/firestore";
 import PopUp from "./PopUp";
 import PopUpFields from "./PopUpFields";
-import Library from './Library';
-// import {
-//   collection,
-//   getDocs,
-//   addDoc,
-//   updateDoc,
-//   doc,
-//   deleteDoc,
-// } from "firebase/firestore"; // Full list of firebase library if required
 
-// const firebase = getFirebase();
+
+// GRID for responsiveness
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+
 
 const masterLanguages = require("./languages.json");
 const availability = require("./availability.json");
 const ageRanges = require("./ageRanges.json");
 
-function FirebaseForm(props) {
-  const [users, setUsers] = useState([]);
-  const [newOwner, setNewOwner] = useState("");
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
+
+function FirebaseForm({ token, user, SetUser }) {
+  // const [books, setBooks] = useState([]);
   const [newBookTitle, setNewBookTitle] = useState("");
   const [newAuthor, setNewAuthor] = useState("");
   const [newBookLanguage, setNewBookLanguage] = useState("");
@@ -37,25 +39,39 @@ function FirebaseForm(props) {
   const [showPopUp, setShowPopUp] = useState(false);
   const [showPopUpFields, setShowPopUpFields] = useState(false);
 
-  const getUsers = async () => {
-    const languagesCollectionRef = collection(db, newBookLanguage);
-    const data = await getDocs(languagesCollectionRef);
-    console.log(data, users);
-    setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))); //use spread operator to return all fields from data
+
+  function BasicGrid() {
+    return (
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={8}>
+            <Item>xs=8</Item>
+          </Grid>
+          <Grid item xs={4}>
+            <Item>xs=4</Item>
+          </Grid>
+          <Grid item xs={4}>
+            <Item>xs=4</Item>
+          </Grid>
+          <Grid item xs={8}>
+            <Item>xs=8</Item>
+          </Grid>
+        </Grid>
+      </Box>
+    );
   };
 
-  const createUser = async () => {
+
+  const createBook = async () => {
     if (
       newBookLanguage !== "" &&
-      newOwner !== "" &&
       newBookTitle !== "" &&
       newAuthor !== "" &&
       newAgeRange !== "" &&
       newLocation !== ""
     ) {
-      const languagesCollectionRef = collection(db, newBookLanguage);
-      await addDoc(languagesCollectionRef, {
-        owner: newOwner,
+      const book = {
+        owner: user.uid,
         bookTitle: newBookTitle,
         author: newAuthor,
         bookLanguage: newBookLanguage,
@@ -66,27 +82,32 @@ function FirebaseForm(props) {
         location: newLocation,
         comment: newComment,
         image: newImage,
-      });
+
+      };
+      const collectionRef = collection(db, 'languages', `${newBookLanguage}`, "books");
+      await addDoc(collectionRef, book);
       setShowPopUp(true);
 
-      getUsers();
+      // getUsers();
     } else {
       setShowPopUpFields(true);
     }
   };
 
-  useEffect( () => {
-    console.log(showPopUp);
-  }, [showPopUp]);
+  useEffect(() => {
+    // getToken();
+    // console.log("userDetails:", userDetails);
+  // }, [showPopUp, userDetails]);
+    }, []);
 
   const closeHandler = () => {
     setShowPopUp(false);
     window.location.reload();
-  }
+  };
 
   const closePopUpFields = () => {
     setShowPopUpFields(false);
-  }
+  };
 
   const onImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -96,45 +117,20 @@ function FirebaseForm(props) {
     }
   };
 
-  // const handleUpload = async (event) => {
-  //   if (!firebase) return;
-
-  //   const uploadedFile = event?.target.files[0];
-  //   if (!uploadedFile) return;
-
-  //   const storage = firebase.storage();
-  //   const storageRef = storage.ref("images");
-
-  //   try {
-  //     await storageRef.child(uploadedFile.name).put(uploadedFile);
-  //     alert("Successfully uploaded picture!");
-  //   } catch (error) {
-  //     console.log("error", error);
-  //   }
-  // };
-
-  const logoutHandler = () => {
-    localStorage.removeItem("token");
-    window.location.reload();
-  }
-
-  // show Login page if not logged in (token in localeStorage)
-  const { token, setToken } = useToken();
-  if (!token) {
-    return <Login setToken={setToken} />
-  }
   return (
-    <div className="firebaseform">
+    <>
+    {token && (<div className="firebaseform">
       <h2>Add your book to the virtual shelf!</h2>
       <p>Fields marked with * are required</p>
       <label htmlFor="booklang">Book Language*</label>
       <select
+        defaultValue=""
         placeholder="booklang"
         onChange={(event) => {
           setNewBookLanguage(event.target.value);
         }}
       >
-        <option key="default" value="" disabled selected>
+        <option key="default" value="" disabled>
           Select Language*
         </option>
         {masterLanguages.map((obj) => {
@@ -145,15 +141,15 @@ function FirebaseForm(props) {
           );
         })}
       </select>
-      <label htmlFor="owner">(Owner)*</label>
+      {/* <label htmlFor="owner">(Owner)*</label>
       <input
         required
         type="text"
         placeholder="Owner"
         onChange={(event) => {
-          setNewOwner(event.target.value);
+          SetUser(event.target.value);
         }}
-      />
+      /> */}
       <label htmlFor="booktitle">Book Title*</label>
       <input
         required
@@ -182,12 +178,12 @@ function FirebaseForm(props) {
       />
       <label htmlFor="ageRange">Age Range*</label>
       <select
-        required
-        placeholder="Age Range"
+        defaultValue="Adult"
         onChange={(event) => {
           setNewAgeRange(event.target.value);
         }}
       >
+        
         {ageRanges.map((obj) => {
           return (
             <option key={obj.name} value={obj.name}>
@@ -198,11 +194,12 @@ function FirebaseForm(props) {
       </select>
       <label htmlFor="available">Availability</label>
       <select
+        defaultValue=""
         onChange={(event) => {
           setNewAvailable(event.target.value);
         }}
       >
-        <option key="default" value="" disabled selected>
+        <option key="default" value="" disabled >
           Availability
         </option>
         {availability.map((obj) => {
@@ -246,12 +243,24 @@ function FirebaseForm(props) {
         accept="image/png, image/jpeg, image/jpg"
         onChange={onImageChange}
       />
-      <button onClick={createUser}>Add Book</button>
-      {(showPopUp === true) && <PopUp close={ closeHandler } />}
-      {showPopUpFields && <PopUpFields close={ closePopUpFields } lang={newBookLanguage} aut={newAuthor} owner={newOwner} title={newBookTitle} age={newAgeRange} loc={newLocation}/>}
-       {newBookLanguage && <Library language= {newBookLanguage} />}
-        <button className="fake_logout" onClick={logoutHandler}>LOG OUT</button>
-    </div>
+      <button onClick={createBook}>Add Book</button>
+      {showPopUp === true && <PopUp close={closeHandler} />}
+      {showPopUpFields && (
+        <PopUpFields
+          close={closePopUpFields}
+          lang={newBookLanguage}
+          aut={newAuthor}
+          owner={user}
+          title={newBookTitle}
+          age={newAgeRange}
+          loc={newLocation}
+        />
+      )}
+    </div>)}
+    {!token && (
+      <h2>Sign in to add a book</h2>
+    )}
+    </>
   );
 }
 
