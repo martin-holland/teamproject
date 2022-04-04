@@ -1,9 +1,10 @@
 import React from 'react';
 
-const UserDashboard = () => {
+const UserDashboard = ({ user }) => {
     return (
         <div>
-            Books of the user
+            <h4>daa{`${user}'s books:`}</h4>
+            <p> fdjshfjsdhjkdshfjksdhg</p>
         </div>
     );
 };

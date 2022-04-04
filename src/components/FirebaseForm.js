@@ -123,7 +123,7 @@ function FirebaseForm({ token, user, SetUser }) {
   return (
     <>
       <div className="firebaseForm-container">
-        <Container maxWidth="xs" alignItems="center" justifyContent="center">
+        <Container maxWidth="xs" >
           <Grid>
             {token && (
               <div className="firebase">

@@ -30,6 +30,7 @@ select {
 .search_results {
   display: flex;
   flex-wrap: wrap;
+  height: 90vh;
 }
 
 .bookTitle {
