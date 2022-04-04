@@ -1,0 +1,30 @@
+.firebase {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+}
+
+.firebase select {
+  width: 300px;
+  margin: 0;
+}
+
+.firebase input {
+  margin-left: 5px;
+  border: none;
+  width: 295px;
+  margin-left: 0;
+}
+
+.firebase button {
+  width: 300px;
+  margin: 0;
+  margin-top: 10px;
+}
+
+.firebaseForm-container {
+  display: flex;
+  max-height: 99vh;
+  width: 100vw;
+}

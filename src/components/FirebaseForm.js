@@ -1,26 +1,27 @@
-import { useState, useEffect} from "react";
-import { db,  } from "./firebase-config";
+import { useState, useEffect } from "react";
+import { db } from "./firebase-config";
 import { collection, addDoc } from "firebase/firestore";
 import PopUp from "./PopUp";
 import PopUpFields from "./PopUpFields";
-
+import "./FirebaseForm.css";
 
 // GRID for responsiveness
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
+import { Typography } from "@mui/material";
 
 const masterLanguages = require("./languages.json");
 const availability = require("./availability.json");
 const ageRanges = require("./ageRanges.json");
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
   padding: theme.spacing(1),
-  textAlign: 'center',
+  textAlign: "center",
   color: theme.palette.text.secondary,
 }));
 
@@ -38,7 +39,6 @@ function FirebaseForm({ token, user, SetUser }) {
   const [newImage, setNewImage] = useState(null);
   const [showPopUp, setShowPopUp] = useState(false);
   const [showPopUpFields, setShowPopUpFields] = useState(false);
-
 
   function BasicGrid() {
     return (
@@ -59,8 +59,7 @@ function FirebaseForm({ token, user, SetUser }) {
         </Grid>
       </Box>
     );
-  };
-
+  }
 
   const createBook = async () => {
     if (
@@ -82,9 +81,13 @@ function FirebaseForm({ token, user, SetUser }) {
         location: newLocation,
         comment: newComment,
         image: newImage,
-
       };
-      const collectionRef = collection(db, 'languages', `${newBookLanguage}`, "books");
+      const collectionRef = collection(
+        db,
+        "languages",
+        `${newBookLanguage}`,
+        "books"
+      );
       await addDoc(collectionRef, book);
       setShowPopUp(true);
 
@@ -97,8 +100,8 @@ function FirebaseForm({ token, user, SetUser }) {
   useEffect(() => {
     // getToken();
     // console.log("userDetails:", userDetails);
-  // }, [showPopUp, userDetails]);
-    }, []);
+    // }, [showPopUp, userDetails]);
+  }, []);
 
   const closeHandler = () => {
     setShowPopUp(false);
@@ -119,29 +122,37 @@ function FirebaseForm({ token, user, SetUser }) {
 
   return (
     <>
-    {token && (<div className="firebaseform">
-      <h2>Add your book to the virtual shelf!</h2>
-      <p>Fields marked with * are required</p>
-      <label htmlFor="booklang">Book Language*</label>
-      <select
-        defaultValue=""
-        placeholder="booklang"
-        onChange={(event) => {
-          setNewBookLanguage(event.target.value);
-        }}
-      >
-        <option key="default" value="" disabled>
-          Select Language*
-        </option>
-        {masterLanguages.map((obj) => {
-          return (
-            <option key={obj.name} value={obj.name}>
-              {obj.name}
-            </option>
-          );
-        })}
-      </select>
-      {/* <label htmlFor="owner">(Owner)*</label>
+      <div className="firebaseForm-container">
+        <Container maxWidth="xs" alignItems="center" justifyContent="center">
+          <Grid>
+            {token && (
+              <div className="firebase">
+                <Typography variant="h6">
+                  Add your book to the virtual shelf!
+                </Typography>
+                <p>Fields marked with * are required</p>
+                <Grid item xs={8}>
+                  <label htmlFor="booklang">Book Language*</label>
+                  <select
+                    defaultValue=""
+                    placeholder="booklang"
+                    onChange={(event) => {
+                      setNewBookLanguage(event.target.value);
+                    }}
+                  >
+                    <option key="default" value="" disabled>
+                      Select Language*
+                    </option>
+                    {masterLanguages.map((obj) => {
+                      return (
+                        <option key={obj.name} value={obj.name}>
+                          {obj.name}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </Grid>
+                {/* <label htmlFor="owner">(Owner)*</label>
       <input
         required
         type="text"
@@ -150,116 +161,133 @@ function FirebaseForm({ token, user, SetUser }) {
           SetUser(event.target.value);
         }}
       /> */}
-      <label htmlFor="booktitle">Book Title*</label>
-      <input
-        required
-        type="text"
-        placeholder="book title"
-        onChange={(event) => {
-          setNewBookTitle(event.target.value);
-        }}
-      />
-      <label htmlFor="booktitle">Author*</label>
-      <input
-        required
-        type="text"
-        placeholder="book title"
-        onChange={(event) => {
-          setNewAuthor(event.target.value);
-        }}
-      />
-      <label htmlFor="isbn">ISBN</label>
-      <input
-        type="text"
-        placeholder="isbn"
-        onChange={(event) => {
-          setnewISBN(event.target.value);
-        }}
-      />
-      <label htmlFor="ageRange">Age Range*</label>
-      <select
-        defaultValue="Adult"
-        onChange={(event) => {
-          setNewAgeRange(event.target.value);
-        }}
-      >
-        
-        {ageRanges.map((obj) => {
-          return (
-            <option key={obj.name} value={obj.name}>
-              {obj.name}
-            </option>
-          );
-        })}
-      </select>
-      <label htmlFor="available">Availability</label>
-      <select
-        defaultValue=""
-        onChange={(event) => {
-          setNewAvailable(event.target.value);
-        }}
-      >
-        <option key="default" value="" disabled >
-          Availability
-        </option>
-        {availability.map((obj) => {
-          return (
-            <option key={obj.name} value={obj.name}>
-              {obj.name}
-            </option>
-          );
-        })}
-      </select>
-      <label htmlFor="pubYear">Publication Year</label>
-      <input
-        type="text"
-        placeholder="pub year"
-        onChange={(event) => {
-          setNewPubYear(event.target.value);
-        }}
-      />
-      <label htmlFor="location">Location*</label>
-      <input
-        required
-        type="text"
-        placeholder="location"
-        onChange={(event) => {
-          setNewLocation(event.target.value);
-        }}
-      />
-      <label htmlFor="comment">Comment/Condition</label>
-      <input
-        type="text"
-        placeholder="comment"
-        onChange={(event) => {
-          setNewComment(event.target.value);
-        }}
-      />
-      <label htmlFor="bookCover">Add a picture</label>
-      <input
-        id="bookCover"
-        type="file"
-        // ref={ref}
-        accept="image/png, image/jpeg, image/jpg"
-        onChange={onImageChange}
-      />
-      <button onClick={createBook}>Add Book</button>
-      {showPopUp === true && <PopUp close={closeHandler} />}
-      {showPopUpFields && (
-        <PopUpFields
-          close={closePopUpFields}
-          lang={newBookLanguage}
-          aut={newAuthor}
-          owner={user}
-          title={newBookTitle}
-          age={newAgeRange}
-          loc={newLocation}
-        />
-      )}
-    </div>)}
-    {!token && (
-      <h2>Sign in to add a book</h2>
-    )}
+                <Grid item xs={8}>
+                  <label htmlFor="booktitle">Book Title*</label>
+                  <input
+                    required
+                    type="text"
+                    placeholder="book title"
+                    onChange={(event) => {
+                      setNewBookTitle(event.target.value);
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={8}>
+                  <label htmlFor="booktitle">Author*</label>
+                  <input
+                    required
+                    type="text"
+                    placeholder="book title"
+                    onChange={(event) => {
+                      setNewAuthor(event.target.value);
+                    }}
+                  />
+                </Grid>
+                <label htmlFor="isbn">ISBN</label>
+                <input
+                  type="text"
+                  placeholder="isbn"
+                  onChange={(event) => {
+                    setnewISBN(event.target.value);
+                  }}
+                />
+                <Grid item xs={8}>
+                  <label htmlFor="ageRange">Age Range*</label>
+                  <select
+                    defaultValue="Adult"
+                    onChange={(event) => {
+                      setNewAgeRange(event.target.value);
+                    }}
+                  >
+                    {ageRanges.map((obj) => {
+                      return (
+                        <option key={obj.name} value={obj.name}>
+                          {obj.name}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </Grid>
+                <Grid item xs={8}>
+                  <label htmlFor="available">Availability</label>
+                  <select
+                    defaultValue=""
+                    onChange={(event) => {
+                      setNewAvailable(event.target.value);
+                    }}
+                  >
+                    <option key="default" value="" disabled>
+                      Availability
+                    </option>
+                    {availability.map((obj) => {
+                      return (
+                        <option key={obj.name} value={obj.name}>
+                          {obj.name}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </Grid>
+                <Grid item xs={8}>
+                  <label htmlFor="pubYear">Publication Year</label>
+                  <input
+                    type="text"
+                    placeholder="pub year"
+                    onChange={(event) => {
+                      setNewPubYear(event.target.value);
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={8}>
+                  <label htmlFor="location">Location*</label>
+                  <input
+                    required
+                    type="text"
+                    placeholder="location"
+                    onChange={(event) => {
+                      setNewLocation(event.target.value);
+                    }}
+                  />
+                </Grid>
+                <label htmlFor="comment">Comment/Condition</label>
+                <input
+                  type="text"
+                  placeholder="comment"
+                  onChange={(event) => {
+                    setNewComment(event.target.value);
+                  }}
+                />
+                <Grid item xs={8}>
+                  <label htmlFor="bookCover">Add a picture</label>
+                  <input
+                    id="bookCover"
+                    type="file"
+                    // ref={ref}
+                    accept="image/png, image/jpeg, image/jpg"
+                    onChange={onImageChange}
+                  />
+                </Grid>
+                <Grid item xs={8}>
+                  <button onClick={createBook}>Add Book</button>
+                  {showPopUp === true && <PopUp close={closeHandler} />}
+                  {showPopUpFields && (
+                    <PopUpFields
+                      close={closePopUpFields}
+                      lang={newBookLanguage}
+                      aut={newAuthor}
+                      owner={user}
+                      title={newBookTitle}
+                      age={newAgeRange}
+                      loc={newLocation}
+                    />
+                  )}
+                </Grid>
+              </div>
+            )}
+            {!token && <h2>Sign in to add a book</h2>}
+          </Grid>
+        </Container>
+      </div>
     </>
   );
 }
