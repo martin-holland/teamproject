@@ -28,3 +28,16 @@
   max-height: 99vh;
   width: 100vw;
 }
+
+.sign {
+  color: #6f4e37;
+  font-family: "Open Sans", sans-serif;
+  margin-top: 300px;
+  margin-left: 50px;
+}
+
+.firebaseForm-container {
+  color: #6f4e37;
+  font-family: "Open Sans", sans-serif;
+  height: 80vh;
+}

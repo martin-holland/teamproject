@@ -128,7 +128,7 @@ function FirebaseForm({ token, user, SetUser }) {
             {token && (
               <div className="firebase">
                 <Typography variant="h6">
-                  Add your book to the virtual shelf!
+                  Add your book to the virtual shelf
                 </Typography>
                 <p>Fields marked with * are required</p>
                 <Grid item xs={8}>
@@ -284,7 +284,7 @@ function FirebaseForm({ token, user, SetUser }) {
                 </Grid>
               </div>
             )}
-            {!token && <h2>Sign in to add a book</h2>}
+            {!token && <h2 className="sign">Sign in to add a book!</h2>}
           </Grid>
         </Container>
       </div>
