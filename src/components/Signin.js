@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import {
   GoogleAuthProvider,
   signInWithPopup,
@@ -48,7 +49,7 @@ const Signin = ({ token, setToken}) => {
 
   return (
       <button onClick={signInWithGoogle}>
-        Sign In
+        <Link to="signin">Sign In</Link>
       </button>
   );
 };
