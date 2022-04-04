@@ -34,7 +34,8 @@
 
 // export default Nav;
 
-import * as React from 'react';
+// import React from 'react';
+import { useState, useEffect } from "react";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -55,12 +56,13 @@ const pages = ['Search by lang', 'Search by age', 'Add a book', 'About'];
 // const loginOptions = ['Login with Google', 'Login with credentials'];
 
 const Nav = ({ token, setToken, user, setUser }) => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
   // const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  React.useEffect(() => {
+
+  useEffect(() => {
     console.log("user", user);
-  }, [user]);
+  }, [user, token]);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -69,7 +71,6 @@ const Nav = ({ token, setToken, user, setUser }) => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
 
   return (
     <AppBar position="static"
@@ -146,7 +147,7 @@ const Nav = ({ token, setToken, user, setUser }) => {
           <Box sx={{ flexGrow: 0 }}>
 
             {!token && <Signin token={token} setToken={setToken} user={user} setUser={setUser} />}
-            {token && <p>{`Hello, ${user.displayName}`}</p>}
+            {token && <p>{`Hello, ${user?.displayName.split(' ')[0]}`}</p>}
             {token && <Signout token={token} setToken={setToken} user={user} setUser={setUser} />} 
           </Box>
         </Toolbar>

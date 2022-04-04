@@ -4,9 +4,25 @@ import { collection, addDoc } from "firebase/firestore";
 import PopUp from "./PopUp";
 import PopUpFields from "./PopUpFields";
 
+
+// GRID for responsiveness
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+
+
 const masterLanguages = require("./languages.json");
 const availability = require("./availability.json");
 const ageRanges = require("./ageRanges.json");
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 function FirebaseForm({ token, user, SetUser }) {
   // const [books, setBooks] = useState([]);
@@ -24,6 +40,28 @@ function FirebaseForm({ token, user, SetUser }) {
   const [showPopUpFields, setShowPopUpFields] = useState(false);
 
 
+  function BasicGrid() {
+    return (
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={8}>
+            <Item>xs=8</Item>
+          </Grid>
+          <Grid item xs={4}>
+            <Item>xs=4</Item>
+          </Grid>
+          <Grid item xs={4}>
+            <Item>xs=4</Item>
+          </Grid>
+          <Grid item xs={8}>
+            <Item>xs=8</Item>
+          </Grid>
+        </Grid>
+      </Box>
+    );
+  };
+
+
   const createBook = async () => {
     if (
       newBookLanguage !== "" &&
@@ -33,7 +71,7 @@ function FirebaseForm({ token, user, SetUser }) {
       newLocation !== ""
     ) {
       const book = {
-        owner: user,
+        owner: user.uid,
         bookTitle: newBookTitle,
         author: newAuthor,
         bookLanguage: newBookLanguage,
@@ -44,6 +82,7 @@ function FirebaseForm({ token, user, SetUser }) {
         location: newLocation,
         comment: newComment,
         image: newImage,
+
       };
       const collectionRef = collection(db, 'languages', `${newBookLanguage}`, "books");
       await addDoc(collectionRef, book);
@@ -144,6 +183,7 @@ function FirebaseForm({ token, user, SetUser }) {
           setNewAgeRange(event.target.value);
         }}
       >
+        
         {ageRanges.map((obj) => {
           return (
             <option key={obj.name} value={obj.name}>
