@@ -29,7 +29,7 @@ const About = () => {
         can enjoy it.
       </p>
       <p>
-      If you have any questions, please check out the<Link to="/FAQ">Frequently Asked Questions.</Link>
+      If you have any questions, please check out the <Link to="/FAQ">Frequently Asked Questions.</Link>
       </p>
     </div>
     <div className="herobanner">
