@@ -14,7 +14,7 @@ import { useState } from "react";
 // for MUI nav
 import { Route, Routes } from "react-router";
 import Nav from './components/Nav';
-import NotAvailable from './components/NotAvailable';
+// import NotAvailable from './components/NotAvailable';
 import UserDashboard from './components/UserDashboard';
 
 // const RouteWrapper = (props) => {
