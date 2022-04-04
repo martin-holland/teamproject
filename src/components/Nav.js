@@ -51,6 +51,8 @@ import { Link } from 'react-router-dom';
 import Signin from './Signin';
 import Signout from './Signout';
 import logo from "./assets/logo.svg";
+import { withStyles } from "@mui/material";
+import { red } from "@mui/material/colors";
 
 const pages = ['Search by lang', 'Search by age', 'Add a book', 'About'];
 // const loginOptions = ['Login with Google', 'Login with credentials'];
@@ -59,6 +61,9 @@ const Nav = ({ token, setToken, user, setUser }) => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   // const [anchorElUser, setAnchorElUser] = React.useState(null);
 
+  // const styledButton = withStyles ({
+
+  // })
 
   useEffect(() => {
     console.log("user", user);
@@ -74,7 +79,7 @@ const Nav = ({ token, setToken, user, setUser }) => {
 
   return (
     <AppBar position="static"
-    sx={{backgroundColor: "#efb167", color: "#4d2c06"}}>
+    sx={{backgroundColor: "#efb167", color: "#6f4e37"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -83,7 +88,7 @@ const Nav = ({ token, setToken, user, setUser }) => {
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-          <Link style={{textDecoration: "none", color: "black"}} to='/'>
+          <Link style={{textDecoration: "none", color: "#6f4e37"}} to='/'>
           <img src={logo} alt="Virtual Shelf logo" />
           </Link>
           </Typography>
@@ -118,8 +123,8 @@ const Nav = ({ token, setToken, user, setUser }) => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu} sx={{backgroundColor: "#efb167", color: "#4d2c06"}}>
-                  <Typography textAlign="center" ><Link style={{textDecoration: "none", color: "black"}} to={`/${page}`}>{page}</Link></Typography>
+                <MenuItem key={page} onClick={handleCloseNavMenu} sx={{backgroundColor: "#efb167", color: "#6f4e37", opacity: 90}}>
+                  <Typography textAlign="center" ><Link style={{textDecoration: "none", color: "#6f4e37"}} to={`/${page}`}>{page}</Link></Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -137,9 +142,10 @@ const Nav = ({ token, setToken, user, setUser }) => {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
+                style={{maxWidth: '200px', maxHeight: '50px', minWidth: '200px', minHeight: '50px', margin: '5px', backgroundColor: 'transparent'}}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                <Link style={{textDecoration: "none", color: "black"}} to={`/${page}`}>{page}</Link>
+                <Link style={{textDecoration: "none", color: "#6f4e37", fontSize: '17px', padding: '5px', textTransform: 'none'}} to={`/${page}`}>{page}</Link>
               </Button>
             ))}
           </Box>
