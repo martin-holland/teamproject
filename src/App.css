@@ -10,6 +10,10 @@ body {
   background: #efb167;
   height: 100vh;
 }
+.search_results {
+  height: 80vh;
+
+}
 
 header {
   width: 100%;
