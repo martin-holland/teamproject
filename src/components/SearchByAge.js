@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { db } from "./firebase-config";
 import { getDocs, collectionGroup, query, where } from "firebase/firestore";
 import BookCard from "./BookCard";
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import './Main.css';
 // import PopUpLanguage from './PopUpLanguage';
  
@@ -17,16 +19,24 @@ function SearchByAge(props) {
     const [foundBooks, setFoundBooks] = useState([]);
     const [ageRange, setAgeRange] = useState("");
     const [language, setLanguage] = useState("");
-    // const [showPopUpLanguage, setShowPopUpLanguage] = useState(false);
-    // const [showPopUpAge, setShowPopUpAge] = useState(false);
+    const [showAlert, setShowAlert] = useState(false);
 
     const handleSubmit = e => {
         e.preventDefault();
         if (ageRange){
             getBooks();
         } 
+        if (foundBooks.length < 1) {
+            setShowAlert(true);
+        }
+    };
 
-    }
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setShowAlert(false);
+    };
 
     const getBooks = async () => {
         const books = query(collectionGroup(db, 'books'), where('ageRange', '==', ageRange));
@@ -84,6 +94,14 @@ function SearchByAge(props) {
         </form>
 
         <div className="search_results">
+        {showAlert && (<Snackbar open={showAlert} autoHideDuration={6000} onClose={handleClose}>
+                                <Alert onClose={handleClose}
+                                    severity="info" 
+                                    sx={{ width: '100%' }}
+                                >
+                                    No books found matching this search. Try something else.
+                                </Alert>
+                            </Snackbar>)}
             {foundBooks.map(book => (
                     <BookCard
                     image={book.image}
