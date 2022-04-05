@@ -123,7 +123,7 @@ function FirebaseForm({ token, user, SetUser }) {
   return (
     <>
       <div className="firebaseForm-container">
-        <Container maxWidth="xs" >
+        <Container maxWidth="xs">
           <Grid>
             {token && (
               <div className="firebase">
@@ -166,7 +166,7 @@ function FirebaseForm({ token, user, SetUser }) {
                   <input
                     required
                     type="text"
-                    placeholder="book title"
+                    placeholder="Title"
                     onChange={(event) => {
                       setNewBookTitle(event.target.value);
                     }}
@@ -177,7 +177,7 @@ function FirebaseForm({ token, user, SetUser }) {
                   <input
                     required
                     type="text"
-                    placeholder="book title"
+                    placeholder="Author"
                     onChange={(event) => {
                       setNewAuthor(event.target.value);
                     }}
@@ -186,7 +186,7 @@ function FirebaseForm({ token, user, SetUser }) {
                 <label htmlFor="isbn">ISBN</label>
                 <input
                   type="text"
-                  placeholder="isbn"
+                  placeholder="ISBN"
                   onChange={(event) => {
                     setnewISBN(event.target.value);
                   }}
@@ -235,7 +235,7 @@ function FirebaseForm({ token, user, SetUser }) {
                   <label htmlFor="pubYear">Publication Year</label>
                   <input
                     type="text"
-                    placeholder="pub year"
+                    placeholder="Publication year"
                     onChange={(event) => {
                       setNewPubYear(event.target.value);
                     }}
@@ -246,7 +246,7 @@ function FirebaseForm({ token, user, SetUser }) {
                   <input
                     required
                     type="text"
-                    placeholder="location"
+                    placeholder="Location"
                     onChange={(event) => {
                       setNewLocation(event.target.value);
                     }}
@@ -255,7 +255,7 @@ function FirebaseForm({ token, user, SetUser }) {
                 <label htmlFor="comment">Comment/Condition</label>
                 <input
                   type="text"
-                  placeholder="comment"
+                  placeholder="Comment"
                   onChange={(event) => {
                     setNewComment(event.target.value);
                   }}

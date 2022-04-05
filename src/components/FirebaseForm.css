@@ -41,3 +41,7 @@
   font-family: "Open Sans", sans-serif;
   height: 80vh;
 }
+
+::placeholder {
+  padding-left: 5px
+}
