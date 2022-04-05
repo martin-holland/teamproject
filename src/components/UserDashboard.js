@@ -10,7 +10,7 @@ import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 
 const UserDashboard = ({ user }) => {
-    const [userBooks, setUserBooks] = useState([]);  
+    const [userBooks, setUserBooks] = useState([]);
 
 
     useEffect( () => {
@@ -25,12 +25,17 @@ const UserDashboard = ({ user }) => {
 
         const matchingBooks = [];
         querySnapshot.forEach(doc => {
-            console.log("book data", doc.data());
-            console.log('hook', userBooks);
-            matchingBooks.push(doc.data());
+            matchingBooks.push([doc.id, doc.data()]);
         });
         setUserBooks(prev => matchingBooks);
-        return matchingBooks;
+        matchingBooks.map(book => {
+            console.log('book id:', book[0]);
+            console.log('book itself:', book[1]);
+        })
+        console.log('secobook id', matchingBooks[2][0]);
+        console.log('book itself', matchingBooks[2][1]);
+
+        // return matchingBooks;
     };
 
     return (
@@ -38,14 +43,15 @@ const UserDashboard = ({ user }) => {
             <Typography  variant="subtitle1" margin="1rem">
                 {`${user?.displayName.split(' ')[0]}'s books:`}
             </Typography>
-            <Grid container spacing={4} justify="center">
+            {/* <Grid container spacing={4} justify="center">
                 <Grid item xs={12} sm={6} md={3}>
                 {userBooks.map(book => {
-                    return <BookCard key={book.bookTitle} book={book}/>
+                    return <BookCard key={book.bookTitle} book={book[0]}/>
                 })}
-                </Grid>
-            </Grid>
+                </Grid> */}
+            {/* </Grid> */}
         </>
+
     );
 };
 
