@@ -33,6 +33,7 @@ export default function BookCard({ book }) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  
 
   return (
     <Card sx={{ minWidth: 275,
