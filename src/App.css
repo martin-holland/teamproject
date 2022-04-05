@@ -273,10 +273,3 @@ input {
   display: flex;
   flex-direction: column;
 }
-
-.logo {
-  position: absolute;
-  width: 100px;
-  top: 20%;
-  left: -6%;
-}

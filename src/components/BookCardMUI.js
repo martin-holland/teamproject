@@ -17,6 +17,15 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import BookCover from "./assets/empty_cover.jpg";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { ClassNames } from "@emotion/react";
+import { db } from "./firebase-config";
+import {
+  doc,
+  deleteDoc,
+  collection,
+  collectionGroup,
+  query,
+  where,
+} from "firebase/firestore";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -34,6 +43,16 @@ export default function BookCard({ book, bookId }) {
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
+  };
+
+  const handleDelete = async () => {
+    console.log("book id from BOOKMUI:", bookId);
+    deleteBook();
+  };
+
+  const deleteBook = async () => {
+    const userDoc = doc(db, "languages", book.bookLanguage, "books", bookId);
+    await deleteDoc(userDoc);
   };
 
   return (
@@ -87,7 +106,7 @@ export default function BookCard({ book, bookId }) {
           <Typography paragraph>{book.comment}</Typography>
           <Typography paragraph>{book.location}</Typography>
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
-            <IconButton>
+            <IconButton onClick={handleDelete}>
               <DeleteIcon />
             </IconButton>
           </div>
