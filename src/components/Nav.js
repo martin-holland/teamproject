@@ -6,7 +6,6 @@
 // import User from './User';
 // import './Nav.css';
 
-
 // function Nav( { token, setToken }) {
 //   useEffect(() => {
 
@@ -36,25 +35,31 @@
 
 // import React from 'react';
 import { useState, useEffect } from "react";
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
 // import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
-import { Link } from 'react-router-dom';
-import Signin from './Signin';
-import Signout from './Signout';
+import Button from "@mui/material/Button";
+import MenuItem from "@mui/material/MenuItem";
+import { Link } from "react-router-dom";
+import Signin from "./Signin";
+import Signout from "./Signout";
 import logo from "./assets/logo.svg";
 import { withStyles } from "@mui/material";
 import { red } from "@mui/material/colors";
 
-const pages = ['Search by lang', 'Search by age', 'Add a book', 'My books', 'About'];
+const pages = [
+  "Search by lang",
+  "Search by age",
+  "Add a book",
+  "My books",
+  "About",
+];
 // const loginOptions = ['Login with Google', 'Login with credentials'];
 
 const Nav = ({ token, setToken, user, setUser }) => {
@@ -78,22 +83,29 @@ const Nav = ({ token, setToken, user, setUser }) => {
   };
 
   return (
-    <AppBar position="sticky"
-    sx={{backgroundColor: "#efb167", color: "#6f4e37"}}>
+    <AppBar
+      position="sticky"
+      sx={{ backgroundColor: "#efb167", color: "#6f4e37", paddingLeft: "80px" }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
             variant="h6"
             noWrap
             component="div"
-            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+            sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
-          <Link style={{textDecoration: "none", color: "#6f4e37"}} to='/'>
-          <img src={logo} alt="Virtual Shelf logo" size="inherit" />
-          </Link>
+            <Link style={{ textDecoration: "none", color: "#6f4e37" }} to="/">
+              <img
+                className="logo"
+                src={logo}
+                alt="Virtual Shelf logo"
+                size="inherit"
+              />
+            </Link>
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="menu"
@@ -108,23 +120,38 @@ const Nav = ({ token, setToken, user, setUser }) => {
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: "bottom",
+                horizontal: "left",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
+                vertical: "top",
+                horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none'},
+                display: { xs: "block", md: "none" },
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu} sx={{backgroundColor: "#efb167", color: "#6f4e37", opacity: 90}}>
-                  <Typography textAlign="center" ><Link style={{textDecoration: "none", color: "#6f4e37"}} to={`/${page}`}>{page}</Link></Typography>
+                <MenuItem
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    backgroundColor: "#efb167",
+                    color: "#6f4e37",
+                    opacity: 90,
+                  }}
+                >
+                  <Typography textAlign="center">
+                    <Link
+                      style={{ textDecoration: "none", color: "#6f4e37" }}
+                      to={`/${page}`}
+                    >
+                      {page}
+                    </Link>
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -133,28 +160,61 @@ const Nav = ({ token, setToken, user, setUser }) => {
             variant="h6"
             noWrap
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+            sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
           >
-            <img src={logo} alt="Virtual Shelf logo" width="100"/>
+            <img src={logo} alt="Virtual Shelf logo" width="100" />
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                style={{maxWidth: '200px', maxHeight: '50px', minWidth: '200px', minHeight: '50px', margin: '5px', backgroundColor: 'transparent'}}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                style={{
+                  maxWidth: "200px",
+                  maxHeight: "50px",
+                  minWidth: "200px",
+                  minHeight: "50px",
+                  margin: "5px",
+                  backgroundColor: "transparent",
+                }}
+                sx={{ my: 2, color: "white", display: "block" }}
               >
-                <Link style={{textDecoration: "none", color: "#6f4e37", fontSize: '17px', padding: '5px', textTransform: 'none'}} to={`/${page}`}>{page}</Link>
+                <Link
+                  style={{
+                    textDecoration: "none",
+                    color: "#6f4e37",
+                    fontSize: "17px",
+                    padding: "5px",
+                    textTransform: "none",
+                  }}
+                  to={`/${page}`}
+                >
+                  {page}
+                </Link>
               </Button>
             ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-
-            {!token && <Signin token={token} setToken={setToken} user={user} setUser={setUser} />}
-            {token && user && <p>{`Hello, ${user?.displayName.split(' ')[0]}`}</p>}
-            {token && <Signout token={token} setToken={setToken} user={user} setUser={setUser} />} 
+            {!token && (
+              <Signin
+                token={token}
+                setToken={setToken}
+                user={user}
+                setUser={setUser}
+              />
+            )}
+            {token && user && (
+              <p>{`Hello, ${user?.displayName.split(" ")[0]}`}</p>
+            )}
+            {token && (
+              <Signout
+                token={token}
+                setToken={setToken}
+                user={user}
+                setUser={setUser}
+              />
+            )}
           </Box>
         </Toolbar>
       </Container>

@@ -12,7 +12,6 @@ body {
 }
 .search_results {
   height: 80vh;
-
 }
 
 header {
@@ -273,4 +272,11 @@ input {
 .single_Book {
   display: flex;
   flex-direction: column;
+}
+
+.logo {
+  position: absolute;
+  width: 100px;
+  top: 20%;
+  left: -6%;
 }

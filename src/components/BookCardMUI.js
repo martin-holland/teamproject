@@ -1,50 +1,52 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Avatar from '@mui/material/Avatar';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import BookCover from './assets/empty_cover.jpg';
+import * as React from "react";
+import { styled } from "@mui/material/styles";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Collapse from "@mui/material/Collapse";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Avatar from "@mui/material/Avatar";
+import { red } from "@mui/material/colors";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShareIcon from "@mui/icons-material/Share";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import BookCover from "./assets/empty_cover.jpg";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { ClassNames } from "@emotion/react";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
 })(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
+  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+  marginLeft: "auto",
+  transition: theme.transitions.create("transform", {
     duration: theme.transitions.duration.shortest,
   }),
 }));
 
-export default function BookCard({ book }) {
+export default function BookCard({ book, bookId }) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  
 
   return (
-    <Card sx={{ minWidth: 275,
-                maxWidth: 300,
-                margin: 1 }}>
+    <Card sx={{ minWidth: 275, maxWidth: 300, margin: 1 }}>
       <CardHeader
-            avatar={
-            <Avatar sx={{ bgcolor: book.ageRange === "Adult" ? "#985C5C" : "#5C985C" }} aria-label="recipe">
-                {book.ageRange === "Adult" ? "A" : "C"}
-            </Avatar>
-            }
+        avatar={
+          <Avatar
+            sx={{ bgcolor: book.ageRange === "Adult" ? "#985C5C" : "#5C985C" }}
+            aria-label="recipe"
+          >
+            {book.ageRange === "Adult" ? "A" : "C"}
+          </Avatar>
+        }
         // action={
         //   <IconButton aria-label="settings">
         //     <MoreVertIcon />
@@ -61,7 +63,7 @@ export default function BookCard({ book }) {
       />
       <CardContent sx={{ maxWidth: 300 }}>
         <Typography variant="body2" color="text.secondary">
-           {book.comment}
+          {book.comment}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -82,12 +84,13 @@ export default function BookCard({ book }) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>
-            {book.comment}
-          </Typography>
-          <Typography paragraph>
-            {book.location}
-          </Typography>
+          <Typography paragraph>{book.comment}</Typography>
+          <Typography paragraph>{book.location}</Typography>
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <IconButton>
+              <DeleteIcon />
+            </IconButton>
+          </div>
         </CardContent>
       </Collapse>
     </Card>
