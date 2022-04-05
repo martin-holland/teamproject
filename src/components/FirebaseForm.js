@@ -194,11 +194,14 @@ function FirebaseForm({ token, user, SetUser }) {
                 <Grid item xs={8}>
                   <label htmlFor="ageRange">Age Range*</label>
                   <select
-                    defaultValue="Adult"
+                  defaultValue=""
                     onChange={(event) => {
                       setNewAgeRange(event.target.value);
                     }}
                   >
+                    <option key="default" value="" disabled>
+                      Recommended age*
+                    </option>
                     {ageRanges.map((obj) => {
                       return (
                         <option key={obj.name} value={obj.name}>

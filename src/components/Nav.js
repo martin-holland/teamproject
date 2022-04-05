@@ -54,7 +54,7 @@ import logo from "./assets/logo.svg";
 import { withStyles } from "@mui/material";
 import { red } from "@mui/material/colors";
 
-const pages = ['Search by lang', 'Search by age', 'Add a book', 'About'];
+const pages = ['Search by lang', 'Search by age', 'Add a book', 'My books', 'About'];
 // const loginOptions = ['Login with Google', 'Login with credentials'];
 
 const Nav = ({ token, setToken, user, setUser }) => {
@@ -153,7 +153,7 @@ const Nav = ({ token, setToken, user, setUser }) => {
           <Box sx={{ flexGrow: 0 }}>
 
             {!token && <Signin token={token} setToken={setToken} user={user} setUser={setUser} />}
-            {token && <p>{`Hello, ${user?.displayName.split(' ')[0]}`}</p>}
+            {token && user && <p>{`Hello, ${user?.displayName.split(' ')[0]}`}</p>}
             {token && <Signout token={token} setToken={setToken} user={user} setUser={setUser} />} 
           </Box>
         </Toolbar>

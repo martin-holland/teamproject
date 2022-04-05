@@ -52,7 +52,7 @@ function App() {
         <Route path="search%20by%20age" element={<SearchByAge />} />
         <Route path="add%20a%20book" element={<FirebaseForm token={token} user={userDetails} setUser={setUserDetails}/>} />
         <Route path="about" element={<About />} />  
-        <Route path="my20%books" element={<UserDashboard user={userDetails}/>} />  
+        <Route path="my%20books" element={<UserDashboard user={userDetails}/>} />  
       </Routes>
       <Footer />
     </div>

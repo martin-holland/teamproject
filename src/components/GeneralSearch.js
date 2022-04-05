@@ -1,11 +1,11 @@
-import React from "react";
 import "./SearchByLanguage.css";
 import { useState, useEffect } from "react";
 import { db } from "./firebase-config";
 import { getDocs, collectionGroup, query } from "firebase/firestore";
-import BookCard from "./BookCard";
+// import BookCard from "./BookCard";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import BookCard from "./BookCardMUI";
 
 
 function GeneralSearch() {
@@ -67,17 +67,18 @@ function GeneralSearch() {
             {foundBooks.filter((book) => {
                 return book.bookTitle.toLowerCase().includes(bookName.toLowerCase())})
                 .map((book) => (
-                    <BookCard
-                    image={book.image}
-                    id={book.id}
-                    key={book.id}
-                    title={book.bookTitle}
-                    available={book.available}
-                    location={book.location}
-                    isbn={book.isbn}
-                    age={book.ageRange}
-                    author={book.author}
-                />
+                //     <BookCard
+                //     image={book.image}
+                //     id={book.id}
+                //     key={book.id}
+                //     title={book.bookTitle}
+                //     available={book.available}
+                //     location={book.location}
+                //     isbn={book.isbn}
+                //     age={book.ageRange}
+                //     author={book.author}
+                // />
+                <BookCard book={book} />
             ))}
         </div>
         </div>

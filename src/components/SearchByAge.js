@@ -3,7 +3,8 @@ import "./SearchByLanguage.css";
 import { useState, useEffect } from "react";
 import { db } from "./firebase-config";
 import { getDocs, collectionGroup, query, where } from "firebase/firestore";
-import BookCard from "./BookCard";
+// import BookCard from "./BookCard";
+import BookCard from "./BookCardMUI";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import './Main.css';
@@ -103,17 +104,18 @@ function SearchByAge(props) {
                                 </Alert>
                             </Snackbar>)}
             {foundBooks.map(book => (
-                    <BookCard
-                    image={book.image}
-                    id={book.id}
-                    key={book.id}
-                    title={book.bookTitle}
-                    available={book.available}
-                    location={book.location}
-                    isbn={book.isbn}
-                    age={book.ageRange}
-                    author={book.author}
-                />
+                //     <BookCard
+                //     image={book.image}
+                //     id={book.id}
+                //     key={book.id}
+                //     title={book.bookTitle}
+                //     available={book.available}
+                //     location={book.location}
+                //     isbn={book.isbn}
+                //     age={book.ageRange}
+                //     author={book.author}
+                // />
+                <BookCard book={book} />
             ))}
         {/* {showPopUpLanguage && <PopUpLanguage close={ closePopupLanguage } />} */}
         </div>

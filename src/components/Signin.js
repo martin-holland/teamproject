@@ -73,7 +73,7 @@ function SimpleDialog(props) {
 
   return (
       <Dialog onClose={handleClose} open={open}>
-        <DialogTitle>Sing in with:</DialogTitle>
+        <DialogTitle>Sign in with:</DialogTitle>
         <List sx={{ pt: 0 }}>
           {loginOptions.map((option) => (
             <ListItem button onClick={() => handleListItemClick(option)} key={option}>
@@ -151,7 +151,7 @@ function SimpleDialog(props) {
           severity="info" 
           sx={{ width: '100%' }}
           >
-            More sing up options coming soon...
+            More sign up options coming soon...
         </Alert>
       </Snackbar>
       </>
