@@ -6,7 +6,8 @@ import { getLangs } from "./functionsLibrary";
 import { useState, useEffect } from "react";
 import { db } from "./firebase-config";
 import { getDocs, collectionGroup, query, where } from "firebase/firestore";
-import BookCard from "./BookCard";
+// import BookCard from "./BookCard";
+import BookCard from "./BookCardMUI";
 import './Main.css';
 
 // name and native name for languages:
@@ -93,17 +94,18 @@ function SearchByLanguage() {
         {foundBooks.filter((book, i) => {
                 return book.bookTitle.toLowerCase().includes(bookName.toLowerCase())})
                 .map((book) => (
-                    <BookCard
-                    image={book.image}
-                    id={book.id}
-                    key={book.id}
-                    title={book.bookTitle}
-                    available={book.available}
-                    location={book.location}
-                    isbn={book.isbn}
-                    age={book.ageRange}
-                    author={book.author}
-                />
+                //     <BookCard
+                //     image={book.image}
+                //     id={book.id}
+                //     key={book.id}
+                //     title={book.bookTitle}
+                //     available={book.available}
+                //     location={book.location}
+                //     isbn={book.isbn}
+                //     age={book.ageRange}
+                //     author={book.author}
+                // />
+                <BookCard book={book} />
             ))}
         </div>
         </div>
