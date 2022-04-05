@@ -143,8 +143,9 @@ footer h4 {
   flex-direction: column;
   justify-content: center;
   width: 80%;
+  max-width: 80vw;
   padding: 2rem;
-  margin-left: 120px;
+  /* margin-left: 120px; */
   font-family: "Open Sans", sans-serif;
   color: #6f4e37;
   align-items: center;
@@ -272,4 +273,39 @@ input {
 .single_Book {
   display: flex;
   flex-direction: column;
+}
+
+
+
+/*** About ***/
+
+.about_people {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.team_member img {
+  max-width: "200px";
+  height: "200px";
+  padding: "1rem";
+}
+
+
+.team_member  {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+
+.about_wrapper {
+   max-width: 100vw;
+}
+
+.firebaseForm-container input,
+.firebaseForm-container select {
+  height: 2.3rem;
 }

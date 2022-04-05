@@ -13,13 +13,13 @@ const Footer = () => {
   return (
     <footer id="footer">
       <div>
-        <h4>The Handlers &copy; 2021</h4>
-        <p>
+        <h4>The Handlers &copy; 2022</h4>
+        {/* <p>
           Phone:<a href="tel:+15555551212">555-555-1212</a>
         </p>
         <p>
           <a href="email:info@handlers.com">E-mail to: info@handlers.com</a>
-        </p>
+        </p> */}
       </div>
     </footer>
   );

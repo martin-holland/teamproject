@@ -12,19 +12,9 @@ import Avatar from "@mui/material/Avatar";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-// import MoreVertIcon from "@mui/icons-material/MoreVert";
 import BookCover from "./assets/empty_cover.jpg";
-import DeleteIcon from "@mui/icons-material/Delete";
-// import { ClassNames } from "@emotion/react";
-import { db } from "./firebase-config";
-import {
-  doc,
-  deleteDoc,
-//   collection,
-//   collectionGroup,
-//   query,
-//   where,
-} from "firebase/firestore";
+
+
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -37,21 +27,13 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function BookCard({ book, bookId }) {
+export default function BookCard({ book }) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  const handleDelete = async () => {
-    deleteBook();
-  };
-
-  const deleteBook = async () => {
-    const userDoc = doc(db, "languages", book.bookLanguage, "books", bookId);
-    await deleteDoc(userDoc);
-  };
 
   return (
     <Card sx={{ minWidth: 275, maxWidth: 300, margin: 1 }}>
@@ -64,11 +46,6 @@ export default function BookCard({ book, bookId }) {
             {book.ageRange === "Adult" ? "A" : "C"}
           </Avatar>
         }
-        // action={
-        //   <IconButton aria-label="settings">
-        //     <MoreVertIcon />
-        //   </IconButton>
-        // }
         title={book.bookTitle}
         subheader={book.author}
       />
@@ -104,9 +81,6 @@ export default function BookCard({ book, bookId }) {
           <Typography paragraph>{book.comment}</Typography>
           <Typography paragraph>{book.location}</Typography>
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
-            <IconButton onClick={handleDelete}>
-              <DeleteIcon />
-            </IconButton>
           </div>
         </CardContent>
       </Collapse>

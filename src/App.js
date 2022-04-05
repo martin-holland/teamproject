@@ -48,9 +48,9 @@ function App() {
       <Nav token={token} setToken={setToken} user={userDetails} setUser={setUserDetails}/>
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="search%20by%20lang" element={<SearchByLanguage />} />
-        <Route path="search%20by%20age" element={<SearchByAge />} />
-        <Route path="add%20a%20book" element={<FirebaseForm token={token} user={userDetails} setUser={setUserDetails}/>} />
+        <Route path="language" element={<SearchByLanguage />} />
+        <Route path="age" element={<SearchByAge />} />
+        <Route path="add%20book" element={<FirebaseForm token={token} user={userDetails} setUser={setUserDetails}/>} />
         <Route path="about" element={<About />} />  
         <Route path="my%20books" element={<UserDashboard user={userDetails}/>} />  
       </Routes>

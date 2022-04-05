@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
 import {
   GoogleAuthProvider,
   signInWithPopup,
@@ -11,7 +10,6 @@ import "./Login.css";
 
 //  LOGIN DIALOG
 import PropTypes from 'prop-types';
-import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -21,11 +19,9 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 // import PersonIcon from '@mui/icons-material/Person';
 import AddIcon from '@mui/icons-material/Add';
-import Typography from '@mui/material/Typography';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import GoogleIcon from './assets/btn_google_light_normal_ios.svg';
-import { blue } from '@mui/material/colors';
 
 const loginOptions = ['Google'];
 
@@ -38,7 +34,8 @@ const Signin = ({ token, setToken, user, setUser }) => {
   useEffect(() => {
     getToken();
     // console.log("userDetails:", userDetails);
-  }, [user, token]);
+    // eslint-disable-next-line
+  },[user, token]);
   
 
 function SimpleDialog(props) {
