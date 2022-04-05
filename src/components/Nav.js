@@ -50,13 +50,13 @@ import { Link } from "react-router-dom";
 import Signin from "./Signin";
 import Signout from "./Signout";
 import logo from "./assets/logo.svg";
-import { withStyles } from "@mui/material";
-import { red } from "@mui/material/colors";
+// import { withStyles } from "@mui/material";
+// import { red } from "@mui/material/colors";
 
 const pages = [
-  "Search by lang",
-  "Search by age",
-  "Add a book",
+  "Language",
+  "Age",
+  "Add book",
   "My books",
   "About",
 ];
@@ -71,7 +71,6 @@ const Nav = ({ token, setToken, user, setUser }) => {
   // })
 
   useEffect(() => {
-    console.log("user", user);
   }, [user, token]);
 
   const handleOpenNavMenu = (event) => {

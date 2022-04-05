@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 import { db } from "./firebase-config";
 import { getDocs, collectionGroup, query, where } from "firebase/firestore";
 // import BookCard from "./BookCard";
-import BookCard from "./BookCardMUI";
-import Snackbar from "@mui/material/Snackbar";
-import Alert from "@mui/material/Alert";
+import BasicCard from './BookCardBasic';
+// import Snackbar from "@mui/material/Snackbar";
+// import Alert from "@mui/material/Alert";
 import "./Main.css";
 // import PopUpLanguage from './PopUpLanguage';
 
@@ -17,24 +17,24 @@ function SearchByAge(props) {
   const [foundBooks, setFoundBooks] = useState([]);
   const [ageRange, setAgeRange] = useState("");
   const [language, setLanguage] = useState("");
-  const [showAlert, setShowAlert] = useState(false);
+  // const [showAlert, setShowAlert] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (ageRange) {
       getBooks();
     }
-    if (foundBooks.length < 1) {
-      setShowAlert(true);
-    }
+    // if (foundBooks.length < 1) {
+    //   setShowAlert(true);
+    // }
   };
 
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setShowAlert(false);
-  };
+  // const handleClose = (event, reason) => {
+  //   if (reason === "clickaway") {
+  //     return;
+  //   }
+  //   setShowAlert(false);
+  // };
 
   const getBooks = async () => {
     const books = query(
@@ -56,7 +56,6 @@ function SearchByAge(props) {
   return (
     <main className="main_background">
       <div className="searchByLang">
-        {/* <h3>Search for books by language and age range:</h3> */}
         <form onSubmit={handleSubmit}>
           <select
             required
@@ -97,7 +96,7 @@ function SearchByAge(props) {
         </form>
 
         <div className="search_results">
-          {showAlert && (
+          {/* {showAlert && (
             <Snackbar
               open={showAlert}
               autoHideDuration={6000}
@@ -111,20 +110,9 @@ function SearchByAge(props) {
                 No books found matching this search. Try something else.
               </Alert>
             </Snackbar>
-          )}
+          )} */}
           {foundBooks.map((book, index) => (
-            //     <BookCard
-            //     image={book.image}
-            //     id={book.id}
-            //     key={book.id}
-            //     title={book.bookTitle}
-            //     available={book.available}
-            //     location={book.location}
-            //     isbn={book.isbn}
-            //     age={book.ageRange}
-            //     author={book.author}
-            // />
-            <BookCard book={book} key={index} />
+            <BasicCard book={book} key={index} />
           ))}
           {/* {showPopUpLanguage && <PopUpLanguage close={ closePopupLanguage } />} */}
         </div>

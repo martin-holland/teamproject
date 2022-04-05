@@ -4,11 +4,6 @@ import { collection, addDoc } from "firebase/firestore";
 import PopUp from "./PopUp";
 import PopUpFields from "./PopUpFields";
 import "./FirebaseForm.css";
-
-// GRID for responsiveness
-import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import { Typography } from "@mui/material";
@@ -16,14 +11,7 @@ import { Typography } from "@mui/material";
 const masterLanguages = require("./languages.json");
 const availability = require("./availability.json");
 const ageRanges = require("./ageRanges.json");
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
+const locations = ['Helsinki', 'Vantaa', 'Espoo', 'Kauniainen', 'Tampere', 'Turku', 'Rovaniemi', 'Tallin', 'Lahti', 'Savonlinna', 'Hyvinkää', 'Hämeenlinna', 'Riihimäki'];
 
 function FirebaseForm({ token, user, SetUser }) {
   // const [books, setBooks] = useState([]);
@@ -39,27 +27,6 @@ function FirebaseForm({ token, user, SetUser }) {
   const [newImage, setNewImage] = useState(null);
   const [showPopUp, setShowPopUp] = useState(false);
   const [showPopUpFields, setShowPopUpFields] = useState(false);
-
-  function BasicGrid() {
-    return (
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={8}>
-            <Item>xs=8</Item>
-          </Grid>
-          <Grid item xs={4}>
-            <Item>xs=4</Item>
-          </Grid>
-          <Grid item xs={4}>
-            <Item>xs=4</Item>
-          </Grid>
-          <Grid item xs={8}>
-            <Item>xs=8</Item>
-          </Grid>
-        </Grid>
-      </Box>
-    );
-  }
 
   const createBook = async () => {
     if (
@@ -132,7 +99,18 @@ function FirebaseForm({ token, user, SetUser }) {
                 </Typography>
                 <p>Fields marked with * are required</p>
                 <Grid item xs={8}>
-                  <label htmlFor="booklang">Book Language*</label>
+                  {/* <label htmlFor="booktitle">Book Title*</label> */}
+                  <input
+                    required
+                    type="text"
+                    placeholder="Book title*"
+                    onChange={(event) => {
+                      setNewBookTitle(event.target.value);
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={8}>
+                  {/* <label htmlFor="booklang">Book Language*</label> */}
                   <select
                     defaultValue=""
                     placeholder="booklang"
@@ -141,7 +119,7 @@ function FirebaseForm({ token, user, SetUser }) {
                     }}
                   >
                     <option key="default" value="" disabled>
-                      Select Language*
+                      Select book language*
                     </option>
                     {masterLanguages.map((obj) => {
                       return (
@@ -152,47 +130,19 @@ function FirebaseForm({ token, user, SetUser }) {
                     })}
                   </select>
                 </Grid>
-                {/* <label htmlFor="owner">(Owner)*</label>
-      <input
-        required
-        type="text"
-        placeholder="Owner"
-        onChange={(event) => {
-          SetUser(event.target.value);
-        }}
-      /> */}
                 <Grid item xs={8}>
-                  <label htmlFor="booktitle">Book Title*</label>
+                  {/* <label htmlFor="booktitle">Author*</label> */}
                   <input
                     required
                     type="text"
-                    placeholder="Title"
-                    onChange={(event) => {
-                      setNewBookTitle(event.target.value);
-                    }}
-                  />
-                </Grid>
-                <Grid item xs={8}>
-                  <label htmlFor="booktitle">Author*</label>
-                  <input
-                    required
-                    type="text"
-                    placeholder="Author"
+                    placeholder="Author*"
                     onChange={(event) => {
                       setNewAuthor(event.target.value);
                     }}
                   />
                 </Grid>
-                <label htmlFor="isbn">ISBN</label>
-                <input
-                  type="text"
-                  placeholder="ISBN"
-                  onChange={(event) => {
-                    setnewISBN(event.target.value);
-                  }}
-                />
                 <Grid item xs={8}>
-                  <label htmlFor="ageRange">Age Range*</label>
+                  {/* <label htmlFor="ageRange">Age Range*</label> */}
                   <select
                   defaultValue=""
                     onChange={(event) => {
@@ -210,9 +160,48 @@ function FirebaseForm({ token, user, SetUser }) {
                       );
                     })}
                   </select>
-                </Grid>
+                  </Grid>
+                  <Grid item xs={8}>
+                  {/* <label htmlFor="ageRange">Age Range*</label> */}
+                  <select
+                  defaultValue=""
+                    onChange={(event) => {
+                      setNewLocation(event.target.value);
+                    }}
+                  >
+                    <option key="default" value="" disabled>
+                      Location*
+                    </option>
+                    {locations.map((location, i) => {
+                      return (
+                        <option key={i} value={location}>
+                          {location}
+                        </option>
+                      );
+                    })}
+                  </select>
+                  </Grid>
+                  {/* <Grid item xs={8}>
+                  <label htmlFor="location">Location*</label> 
+                  <input
+                    required
+                    type="text"
+                    placeholder="Location*"
+                    onChange={(event) => {
+                      setNewLocation(event.target.value);
+                    }}
+                  />
+                </Grid> */}
+                {/* <label htmlFor="isbn">ISBN</label> */}
+                <input
+                  type="text"
+                  placeholder="ISBN"
+                  onChange={(event) => {
+                    setnewISBN(event.target.value);
+                  }}
+                />
                 <Grid item xs={8}>
-                  <label htmlFor="available">Availability</label>
+                  {/* <label htmlFor="available">Availability</label> */}
                   <select
                     defaultValue=""
                     onChange={(event) => {
@@ -232,7 +221,7 @@ function FirebaseForm({ token, user, SetUser }) {
                   </select>
                 </Grid>
                 <Grid item xs={8}>
-                  <label htmlFor="pubYear">Publication Year</label>
+                  {/* <label htmlFor="pubYear">Publication Year</label> */}
                   <input
                     type="text"
                     placeholder="Publication year"
@@ -241,18 +230,7 @@ function FirebaseForm({ token, user, SetUser }) {
                     }}
                   />
                 </Grid>
-                <Grid item xs={8}>
-                  <label htmlFor="location">Location*</label>
-                  <input
-                    required
-                    type="text"
-                    placeholder="Location"
-                    onChange={(event) => {
-                      setNewLocation(event.target.value);
-                    }}
-                  />
-                </Grid>
-                <label htmlFor="comment">Comment/Condition</label>
+                {/* <label htmlFor="comment">Comment/Condition</label> */}
                 <input
                   type="text"
                   placeholder="Comment"

@@ -3,15 +3,15 @@ import { useState, useEffect } from "react";
 import { db } from "./firebase-config";
 import { getDocs, collectionGroup, query } from "firebase/firestore";
 // import BookCard from "./BookCard";
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
-import BookCard from "./BookCardMUI";
+// import Snackbar from '@mui/material/Snackbar';
+// import Alert from '@mui/material/Alert';
+import BasicCard from './BookCardBasic';
 
 
 function GeneralSearch() {
     const [foundBooks, setFoundBooks] = useState([]);
     const [bookName, setBookName] = useState("");
-    const [showAlert, setShowAlert] = useState(false);
+    // const [showAlert, setShowAlert] = useState(false);
  
     useEffect(() => {
 
@@ -20,17 +20,17 @@ function GeneralSearch() {
     const handleSubmit = e => {
         e.preventDefault();
         getBooks();
-        if (foundBooks.length < 1) {
-            setShowAlert(true);
-        }
+        // if (foundBooks.length < 1) {
+        //     setShowAlert(true);
+        // }
     }
 
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-          return;
-        }
-        setShowAlert(false);
-      };
+    // const handleClose = (event, reason) => {
+    //     if (reason === 'clickaway') {
+    //       return;
+    //     }
+    //     setShowAlert(false);
+    //   };
 
     const getBooks = async () => {
         const books = query(collectionGroup(db, 'books'));
@@ -56,29 +56,18 @@ function GeneralSearch() {
         </form>
 
         <div className="search_results">
-            {showAlert && (<Snackbar open={showAlert} autoHideDuration={6000} onClose={handleClose}>
+            {/* {showAlert && (<Snackbar open={showAlert} autoHideDuration={6000} onClose={handleClose}>
                                 <Alert onClose={handleClose}
                                     severity="info" 
                                     sx={{ width: '100%' }}
                                 >
                                     No books found matching this search. Try something else.
                                 </Alert>
-                            </Snackbar>)}
+                            </Snackbar>)} */}
             {foundBooks.filter((book) => {
                 return book.bookTitle.toLowerCase().includes(bookName.toLowerCase())})
-                .map((book) => (
-                //     <BookCard
-                //     image={book.image}
-                //     id={book.id}
-                //     key={book.id}
-                //     title={book.bookTitle}
-                //     available={book.available}
-                //     location={book.location}
-                //     isbn={book.isbn}
-                //     age={book.ageRange}
-                //     author={book.author}
-                // />
-                <BookCard book={book} />
+                .map((book, i) => (
+                <BasicCard book={book} key={i}/>
             ))}
         </div>
         </div>
