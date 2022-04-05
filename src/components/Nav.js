@@ -85,7 +85,7 @@ const Nav = ({ token, setToken, user, setUser }) => {
   return (
     <AppBar
       position="sticky"
-      sx={{ backgroundColor: "#efb167", color: "#6f4e37", paddingLeft: "80px" }}
+      sx={{ backgroundColor: "#efb167", color: "#6f4e37" }}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -96,12 +96,7 @@ const Nav = ({ token, setToken, user, setUser }) => {
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
             <Link style={{ textDecoration: "none", color: "#6f4e37" }} to="/">
-              <img
-                className="logo"
-                src={logo}
-                alt="Virtual Shelf logo"
-                size="inherit"
-              />
+              <img src={logo} alt="Virtual Shelf logo" size="inherit" />
             </Link>
           </Typography>
 

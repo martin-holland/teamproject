@@ -1,12 +1,12 @@
 import React from "react";
 import GeneralSearch from "./GeneralSearch";
-import './Main.css';
+import "./Main.css";
 
 const Main = () => {
   return (
-      <main className="main_background">
-        <GeneralSearch />
-      </main>
+    <main className="main_background">
+      <GeneralSearch />
+    </main>
   );
 };
 
