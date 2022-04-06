@@ -36,7 +36,7 @@ const UserDashboard = ({ user }) => {
 
   return (
     <>
-      <Typography variant="subtitle1" margin="1rem">
+      <Typography variant="subtitle1" margin="1rem" color="#6f4e37" fontFamily={'Open Sans'}>
         {!user ? "Sign in to see your books on the Virtual Shelf" : 
         `${user?.displayName.split(" ")[0]}'s books:`}
       </Typography>
