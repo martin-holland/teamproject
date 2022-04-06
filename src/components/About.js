@@ -11,17 +11,23 @@ const About = () => {
     <div className="container1">
       <h2>Share you books</h2>
       <p>
-        The Virtual Shelf is a place where you can find books in different languages.
-        If you have any books in your home, which you are ready to give away or borrow, add them to the Virtual Shelf. 
+        The Virtual Shelf is a virtual extension of our home bookshelves.
+        
+        In the Virtual Shelf you can find books in different languages. 
+        If you have any books in your home, which you are ready to give away or borrow, add them to the Virtual Shelf.
       </p>
       <p>
-        You can search for books in several languages and there is plenty of selection for both children and adults. Depending on the agreement with the person who has posted the book, you loan it or will not be required to return it. In latter case you can pay it forward and post the book on your profile so someone else can enjoy it.
+      If you are looking for a book but you don't want to order it online or buy it from your locale bookstore, try to search the Virtual Shelf. The Virtual Shelf will connect you with the owner of the book so that you can agree on exchanging.</p>
+      <p>
+        The Virtual Shelf encourages reusing and sharing in the community. It supports cultural and linguistic diversity, and helps people connecting.
       </p>
+      <p>Extend your homeshelf into the Virtual Shelf!</p>
+      <h3>Who made this:</h3>
       <div className="about_people">
         <div className="team_member">
           <h4>KATI</h4>
           <p><strong>CSS, Styling, Frontend</strong></p>
-          <a href="http://www.google.com" target="_blank" rel="noreferrer">
+          <a href="https://www.linkedin.com/in/katiremo/" target="_blank" rel="noreferrer">
             <img src={kati} alt='kati' role="button" />
           </a>
         </div>

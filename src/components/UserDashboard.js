@@ -36,9 +36,9 @@ const UserDashboard = ({ user }) => {
 
   return (
     <>
-      <Typography variant="subtitle1" margin="1rem" color="#6f4e37" fontFamily={'Open Sans'}>
-        {!user ? "Sign in to see your books on the Virtual Shelf" : 
-        `${user?.displayName.split(" ")[0]}'s books:`}
+      <Typography variant="subtitle1" margin="1rem">
+        {user && `${user?.displayName.split(" ")[0]}'s books:`}
+
       </Typography>
       <Grid container spacing={4} justify="center">
         <Grid item xs={12} sm={6} md={3}>
@@ -52,6 +52,7 @@ const UserDashboard = ({ user }) => {
             );
           })}
         </Grid>
+        {!user && <h2 className="sign">Sign in to see your books on the Virtual Shelf</h2>}
       </Grid>
     </>
   );

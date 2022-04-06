@@ -193,6 +193,7 @@ function FirebaseForm({ token, user, SetUser }) {
                   />
                 </Grid> */}
                 {/* <label htmlFor="isbn">ISBN</label> */}
+                <p>Optional information:</p>
                 <input
                   type="text"
                   placeholder="ISBN"
