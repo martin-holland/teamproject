@@ -6,6 +6,7 @@
 .searchByLang input,
 .searchByLang select {
   margin: 1rem;
+  margin-top: 7rem;
   padding: 0.6rem;
   border-radius: 4px;
   background-color: #fefefa;
