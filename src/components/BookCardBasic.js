@@ -36,7 +36,7 @@ export default function BookCard({ book }) {
 
 
   return (
-    <Card sx={{ minWidth: 275, maxWidth: 300, margin: 1 }}>
+    <Card sx={{ minWidth: 275, maxWidth: 300, margin: 1}}>
       <CardHeader
         avatar={
           <Avatar
@@ -60,6 +60,9 @@ export default function BookCard({ book }) {
           {book.comment}
         </Typography>
       </CardContent>
+      <CardContent>
+        <Typography paragraph>{book.location}</Typography>
+      </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
@@ -79,7 +82,6 @@ export default function BookCard({ book }) {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>{book.comment}</Typography>
-          <Typography paragraph>{book.location}</Typography>
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
           </div>
         </CardContent>

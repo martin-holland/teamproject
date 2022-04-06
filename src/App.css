@@ -309,3 +309,9 @@ input {
 .firebaseForm-container select {
   height: 2.3rem;
 }
+
+
+.about_wrapper h3{
+  color: black;
+  margin-top: 3rem;
+}
