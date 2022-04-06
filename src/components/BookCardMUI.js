@@ -10,20 +10,21 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 // import MoreVertIcon from "@mui/icons-material/MoreVert";
 import BookCover from "./assets/empty_cover.jpg";
 import DeleteIcon from "@mui/icons-material/Delete";
+import RequestBook from "@mui/icons-material/Chat";
+import Tooltip from "@mui/material/Tooltip";
 // import { ClassNames } from "@emotion/react";
 import { db } from "./firebase-config";
 import {
   doc,
   deleteDoc,
-//   collection,
-//   collectionGroup,
-//   query,
-//   where,
+  //   collection,
+  //   collectionGroup,
+  //   query,
+  //   where,
 } from "firebase/firestore";
 
 const ExpandMore = styled((props) => {
@@ -84,12 +85,16 @@ export default function BookCard({ book, bookId }) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
+        <Tooltip title="Mark as favorite">
+          <IconButton aria-label="add to favorites">
+            <FavoriteIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Request book">
+          <IconButton aria-label="share">
+            <RequestBook />
+          </IconButton>
+        </Tooltip>
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
@@ -104,9 +109,11 @@ export default function BookCard({ book, bookId }) {
           <Typography paragraph>{book.comment}</Typography>
           <Typography paragraph>{book.location}</Typography>
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
-            <IconButton onClick={handleDelete}>
-              <DeleteIcon />
-            </IconButton>
+            <Tooltip title="Delete Book">
+              <IconButton onClick={handleDelete}>
+                <DeleteIcon />
+              </IconButton>
+            </Tooltip>
           </div>
         </CardContent>
       </Collapse>
